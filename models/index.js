@@ -50,3 +50,5 @@ TBLUser.hasMany(TBLMessages, {
 });
 
 module.exports = { TBLMessages, TBLRole, TBLScript, TBLSearchHistory, TBLUser};
+
+module.exports = { TBLMessages, TBLRole, TBLScript, TBLSearchHistory, TBLUser};
