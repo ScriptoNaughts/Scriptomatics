@@ -12,8 +12,6 @@ TBLMessages.init(
       autoIncrement: true,
       unique: true,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -21,8 +19,6 @@ TBLMessages.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
       references: {
@@ -34,8 +30,6 @@ TBLMessages.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
-          isInt: true,
-          notNull: true,
           notEmpty: true,
         },
         references: {
@@ -47,7 +41,6 @@ TBLMessages.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -57,7 +50,6 @@ TBLMessages.init(
       defaultValue: NOW,
       validate: {
         isDate: true,
-        notNull: true,
         notEmpty: true,
       },
     },

@@ -28,8 +28,6 @@ TBLUser.init(
       autoIncrement: true,
       unique: true,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       }
     },
@@ -38,7 +36,6 @@ TBLUser.init(
       allowNull: false,
       validate: {
         isAlpha: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -47,17 +44,13 @@ TBLUser.init(
       allowNull: false,
       validate: {
         isAlpha: true,
-        notNull: true,
         notEmpty: true,
       },
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     roleID: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate:{
-        notNull: true,
         notEmpty: true,
       },
       references: {
@@ -69,7 +62,6 @@ TBLUser.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
         len: [8],
       },
@@ -80,12 +72,23 @@ TBLUser.init(
       unique: true,
       validate: {
         isEmail: true,
-        notNull: true,
         notEmpty: true,
       },
     },
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+      beforeUpdate: async (updatedUserData) => {
+        if (updatedUserData.password) {
+          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        }
+        return updatedUserData;
+      },
+    },
     sequelize,
     freezeTableName: true,
     underscored: true,

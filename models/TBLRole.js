@@ -12,8 +12,6 @@ TBLRole.init(
       autoIncrement: true,
       unique: true,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -23,7 +21,6 @@ TBLRole.init(
       validate: {
         isAlpha: true,
         isIn: [["writer", "agent"]],
-        notNull: true,
         notEmpty: true,
       },
     },

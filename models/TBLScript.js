@@ -12,8 +12,6 @@ TBLScript.init(
       autoIncrement: true,
       unique: true,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -21,8 +19,6 @@ TBLScript.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
       references: {
@@ -34,7 +30,6 @@ TBLScript.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -42,7 +37,6 @@ TBLScript.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -50,7 +44,6 @@ TBLScript.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -61,7 +54,6 @@ TBLScript.init(
       validate: {
         isAlpha: true,
         isIn: [["draft", "published", "purchased"]],
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -70,8 +62,6 @@ TBLScript.init(
         allowNull: true,
         defaultValue: null,
         validate:{
-          isInt: true,
-          notNull: true,
           notEmpty: true,
         },
         references: {

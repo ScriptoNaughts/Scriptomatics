@@ -12,8 +12,6 @@ TBLSearchHistory.init(
       autoIncrement: true,
       unique: true,
       validate: {
-        isInt: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -24,8 +22,6 @@ TBLSearchHistory.init(
         model: "TBLUser",
         key: "id",
         validate: {
-          isInt: true,
-          notNull: true,
           notEmpty: true,
         },
       }
@@ -35,7 +31,6 @@ TBLSearchHistory.init(
       allowNull: false,
       validate: {
         isAlphanumeric: true,
-        notNull: true,
         notEmpty: true,
       },
     },
@@ -46,7 +41,6 @@ TBLSearchHistory.init(
       validate: {
         isAlpha: true,
         isIn: [["genre", "keyword", "author"]],
-        notNull: true,
         notEmpty: true,
       },
     },
