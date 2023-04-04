@@ -4,7 +4,14 @@ const { TBLUser, TBLRole } = require("../../models");
 // GET one user
 router.get("/:id", async (req, res) => {
   try {
-    const userData = await TBLUser.findByPk(req.params.id);
+    const userData = await TBLUser.findByPk(req.params.id, {
+      include: [
+        {
+          model: TBLRole,
+        },
+      ],
+    });
+
     if (!userData) {
       res.status(404).json({ message: "No user with this id!" });
       return;
@@ -69,9 +76,8 @@ router.post("/", async (req, res) => {
       });
       res.status(400).json({ errors: errorMessages });
     }
-    // Sends the error with a 500 status code if the error is not caused by validation or unique constraint errors
     else {
-      res.status(500).json(err);
+      res.status(400).json(err);
     }
   }
 });
