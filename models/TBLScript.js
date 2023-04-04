@@ -10,36 +10,60 @@ TBLScript.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      unique: true,
+      validate: {
+        notEmpty: true,
+      },
     },
     authorID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
       references: {
         model: "TBLUser",
         key: "id",
       }
     },
     title: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     description: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     text: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     status: {
-        type: DataTypes.ENUM("draft", "published", "purchased"),
-        allowNull: false,
-        defaultValue: "draft",
+      type: DataTypes.ENUM("draft", "published", "purchased"),
+      allowNull: false,
+      defaultValue: "draft",
+      validate: {
+        isAlpha: true,
+        isIn: [["draft", "published", "purchased"]],
+        notEmpty: true,
+      },
     },
     assignedTo: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: null,
+        validate:{
+          notEmpty: true,
+        },
         references: {
             model: "TBLUser",
             key: "id",
