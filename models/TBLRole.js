@@ -10,10 +10,22 @@ TBLRole.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      unique: true,
+      validate: {
+        isInt: true,
+        notNull: true,
+        notEmpty: true,
+      },
     },
     roleTitle: {
       type: DataTypes.ENUM("writer", "agent"),
       allowNull: false,
+      validate: {
+        isAlpha: true,
+        isIn: [["writer", "agent"]],
+        notNull: true,
+        notEmpty: true,
+      },
     },
   },
   {

@@ -26,18 +26,40 @@ TBLUser.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      unique: true,
+      validate: {
+        isInt: true,
+        notNull: true,
+        notEmpty: true,
+      }
     },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isAlpha: true,
+        notNull: true,
+        notEmpty: true,
+      },
     },
     lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        notNull: true,
+        notEmpty: true,
+      },
       type: DataTypes.STRING,
       allowNull: false,
     },
     roleID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate:{
+        notNull: true,
+        notEmpty: true,
+      },
       references: {
         model: "TBLRole",
         key: "id",
@@ -46,10 +68,21 @@ TBLUser.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notNull: true,
+        notEmpty: true,
+        len: [8],
+      },
     },
     emailAddress: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+        notNull: true,
+        notEmpty: true,
+      },
     },
   },
   {

@@ -10,6 +10,12 @@ TBLSearchHistory.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      unique: true,
+      validate: {
+        isInt: true,
+        notNull: true,
+        notEmpty: true,
+      },
     },
     userID: {
       type: DataTypes.INTEGER,
@@ -17,16 +23,32 @@ TBLSearchHistory.init(
       references: {
         model: "TBLUser",
         key: "id",
+        validate: {
+          isInt: true,
+          notNull: true,
+          notEmpty: true,
+        },
       }
     },
     searchText: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        notNull: true,
+        notEmpty: true,
+      },
     },
     searchMode: {
-        type: DataTypes.ENUM("genre", "keyword", "author"),
-        defaultValue: "keyword",
-        allowNull: false,
+      type: DataTypes.ENUM("genre", "keyword", "author"),
+      defaultValue: "keyword",
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        isIn: [["genre", "keyword", "author"]],
+        notNull: true,
+        notEmpty: true,
+      },
     },
   },
   {
