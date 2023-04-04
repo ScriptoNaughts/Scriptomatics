@@ -114,17 +114,30 @@ router.put("/purchase/:id", async (req, res) => {
   }
 });
 
-// DELETE a draft script in the workspace
+// DELETE a draft script in the workspace or a posted script before it is purchased
 router.delete("/:id", async (req, res) => {
   try {
-    const deletedScriptData = await TBLScript.destroy({
+    const scriptData = await TBLScript.findOne({
       where: {
         id: req.params.id,
       },
     });
 
-    if (!deletedScriptData) {
+    // Checks if a script with the requested id exists in the database
+    if (!scriptData) {
       res.status(404).json({ message: "No script found with that id!" });
+      return;
+    }
+
+    // Checks to see if the script has been purchased. If not, then allow the script to be deleted
+    if (scriptData.status !== "purchased") {
+      const deletedScriptData = await TBLScript.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+    } else {
+      res.status(400).json({ message: "Cannot delete purchased scripts" });
       return;
     }
 
