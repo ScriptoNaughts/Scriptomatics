@@ -12,7 +12,7 @@ TBLRole.init(
       autoIncrement: true,
     },
     roleTitle: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("writer", "agent"),
       allowNull: false,
     },
   },

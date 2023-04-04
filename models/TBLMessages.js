@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTypes, NOW } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class TBLMessages extends Model {}
@@ -22,6 +22,10 @@ TBLMessages.init(
     receiverID: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+          model: "TBLUser",
+          key: "id",
+        }
     },
     content: {
       type: DataTypes.STRING,
@@ -30,6 +34,7 @@ TBLMessages.init(
     timeStamp: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: NOW
     },
   },
   {
