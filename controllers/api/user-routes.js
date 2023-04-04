@@ -46,17 +46,25 @@ router.post("/", async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
+    // Checks if the error is caused due to the validation checks placed in the TBLUser model
     if (err.name === "SequelizeValidationError") {
       const errorMessages = err.errors.map((error) => {
-        if (error.path === "email") {
+        if (error.path === "emailAddress") {
           return "Email is not valid";
         } else if (error.path === "password") {
           return "Password must be at least 8 characters long";
         }
       });
       res.status(400).json({ errors: errorMessages });
+    } else if (err.name === "SequelizeUniqueConstraintError") {
+      const errorMessages = err.errors.map((error) => {
+        if (error.path === "emailAddress") {
+          return "Email address already exists";
+        }
+      });
+      res.status(400).json({ errors: errorMessages });
     } else {
-      res.status(400).json(err);
+      res.status(500).json(err);
     }
   }
 });
