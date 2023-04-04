@@ -3,3 +3,22 @@
         margin: 0 1.2rem;
     }
 }
+
+#title {
+    color: #565656;
+    font-family: 'Bebas Neue', sans-serif;
+    padding-left: 0;
+}
+
+.main-nav {
+    background-color: #BABFCD;
+}
+
+#logo, #logo-img, #title {
+
+    padding-bottom: 0;
+}
+
+#logo-img {
+    padding-top: 7px;
+}
