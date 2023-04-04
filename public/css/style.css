@@ -10,15 +10,47 @@
     padding-left: 0;
 }
 
-.main-nav {
+/* .navbar {
     background-color: #BABFCD;
-}
+    height: 10vh;
+} */
 
 #logo, #logo-img, #title {
 
     padding-bottom: 0;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
 }
 
-#logo-img {
+/* #logo-img {
     padding-top: 7px;
+} */
+
+#menu-sidebar {
+    background-color: #BABFCD;
+    
+}
+
+body {
+    position: relative;
+}
+
+#main {
+    margin: 0;
+    height: 90vh;
+}
+
+.li-nav {
+    float: right;
+  }
+
+#nav, #nav-logo, #nav-menu {
+    margin:0;
+    background-color: #BABFCD;
+    padding:0;
+}
+
+
+#nav {
+    align-items: center;
 }
