@@ -5,7 +5,6 @@ const { TBLUser, TBLScript } = require("../../models");
 router.post("/", async (req, res) => {
   /* req.body should look like this...
     {
-      "author": "Abed Abed",
       "title": "Harry Potter",
       "description": "Harry Potter, fictional character, a boy wizard ",
       "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
