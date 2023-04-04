@@ -1,10 +1,10 @@
 const router = require("express").Router();
-const { User, Role } = require("../../models");
+const { TBLUser, TBLRole } = require("../../models");
 
 // GET one user
 router.get("/:id", async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id);
+    const userData = await TBLUser.findByPk(req.params.id);
     if (!userData) {
       res.status(404).json({ message: "No user with this id!" });
       return;
@@ -22,20 +22,22 @@ router.post("/", async (req, res) => {
       "firstName": "Abed",
       "lastName": "Abed",
       "roleTitle": "writer",
-      "email": "abed.abed@hotmail.com",
+      "emailAddress": "abed.abed@hotmail.com",
       "password": "12$123_2abc"
     }
   */
   try {
     // Find the roleId corresponding to the role title in the request body
-    const role = await Role.findOne({ where: { title: req.body.roleTitle } });
+    const role = await TBLRole.findOne({
+      where: { title: req.body.roleTitle },
+    });
     const roleId = role ? role.id : null;
 
-    const userData = await User.create({
+    const userData = await TBLUser.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       roleID: roleId,
-      email: req.body.email,
+      emailAddress: req.body.emailAddress,
       password: req.body.password,
     });
     req.session.save(() => {
@@ -62,7 +64,7 @@ router.post("/", async (req, res) => {
 // DELETE a user
 router.delete("/:id", async (req, res) => {
   try {
-    const userData = await User.destroy({
+    const userData = await TBLUser.destroy({
       where: {
         id: req.params.id,
       },
@@ -76,5 +78,60 @@ router.delete("/:id", async (req, res) => {
     res.status(200).json(userData);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+// Allow a user to login
+router.post("/login", async (req, res) => {
+  try {
+    const userData = await TBLUser.findOne({
+      where: {
+        emailAddress: req.body.emailAddress,
+      },
+    });
+
+    // Checks if a user exists in the database with the provided email
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
+
+    // checkPassword is an instance in the TBLUser model that compares the user-provided password with their
+    // encrypted password that is stored in the database
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    // Returns an error if the user's password does not match the encrypted password in the database
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
+
+    // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
+    // user is successfully logged in
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res
+        .status(200)
+        .json({ user: userData, message: "You are now logged in!" });
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Allow a user to logout
+router.post("/logout", async (req, res) => {
+  // destroys the session associated with the client that made the request
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
