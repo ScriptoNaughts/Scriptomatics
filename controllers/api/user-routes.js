@@ -40,12 +40,16 @@ router.post("/", async (req, res) => {
       emailAddress: req.body.emailAddress,
       password: req.body.password,
     });
+
+    // set up a session with indicating that the new user is logged in and stores this user's ID
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.userID = userData.id;
 
       res.status(200).json(userData);
     });
   } catch (err) {
+    // Checks if the error is caused due to the validation checks placed in the TBLUser model
     if (err.name === "SequelizeValidationError") {
       const errorMessages = err.errors.map((error) => {
         if (error.path === "email") {
@@ -64,18 +68,19 @@ router.post("/", async (req, res) => {
 // DELETE a user
 router.delete("/:id", async (req, res) => {
   try {
-    const userData = await TBLUser.destroy({
+    const deletedUserData = await TBLUser.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    if (!userData) {
+    // Checks if a user exists in the database with the provided id
+    if (!deletedUserData) {
       res.status(404).json({ message: "No user found with that id!" });
       return;
     }
 
-    res.status(200).json(userData);
+    res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -111,9 +116,10 @@ router.post("/login", async (req, res) => {
     }
 
     // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
-    // user is successfully logged in
+    // user is successfully logged in, and a userID keeping track of the id of the logged in user
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.userID = userData.id;
 
       res
         .status(200)
