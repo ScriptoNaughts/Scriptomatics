@@ -10,10 +10,17 @@ TBLMessages.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+      unique: true,
+      validate: {
+        notEmpty: true,
+      },
     },
     senderID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
       references: {
         model: "TBLUser",
         key: "id",
@@ -22,19 +29,29 @@ TBLMessages.init(
     receiverID: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
         references: {
           model: "TBLUser",
           key: "id",
-        }
+        },
     },
     content: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     timeStamp: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: NOW
+      defaultValue: NOW,
+      validate: {
+        isDate: true,
+        notEmpty: true,
+      },
     },
   },
   {
