@@ -46,17 +46,29 @@ router.post("/", async (req, res) => {
       res.status(200).json(userData);
     });
   } catch (err) {
+    // Checks if the error is caused due to the validation checks placed in the TBLUser model
     if (err.name === "SequelizeValidationError") {
       const errorMessages = err.errors.map((error) => {
-        if (error.path === "email") {
+        if (error.path === "emailAddress") {
           return "Email is not valid";
         } else if (error.path === "password") {
           return "Password must be at least 8 characters long";
         }
       });
       res.status(400).json({ errors: errorMessages });
-    } else {
-      res.status(400).json(err);
+    }
+    // Checks if the error is caused due to unique constraint errors
+    else if (err.name === "SequelizeUniqueConstraintError") {
+      const errorMessages = err.errors.map((error) => {
+        if (error.path === "emailAddress") {
+          return "Email address already exists";
+        }
+      });
+      res.status(400).json({ errors: errorMessages });
+    }
+    // Sends the error with a 500 status code if the error is not caused by validation or unique constraint errors
+    else {
+      res.status(500).json(err);
     }
   }
 });
@@ -70,6 +82,7 @@ router.delete("/:id", async (req, res) => {
       },
     });
 
+    // Checks if a user with the requested id exists in the database
     if (!userData) {
       res.status(404).json({ message: "No user found with that id!" });
       return;
