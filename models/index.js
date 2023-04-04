@@ -4,29 +4,49 @@ const TBLScript = require('./TBLScript');
 const TBLSearchHistory = require('./TBLSearchHistory');
 const TBLUser = require('./TBLUser');
 
-TBLRole.hasMany(TBLUser, {
+TBLUser.belongsTo(TBLRole,{
   foreignKey: 'roleID',
   onDelete: "SET NULL",
 });
 
-TBLUser.hasMany(TBLScript, {
+TBLScript.belongsTo(TBLUser,{
   foreignKey: 'authorID',
   onDelete: "SET NULL",
 });
 
+TBLScript.belongsTo(TBLUser,{
+  foreignKey: 'assignedTo',
+  onDelete: "SET NULL",
+});
+
+TBLMessages.belongsTo(TBLUser, {
+  foreignKey: 'receiverID',
+  onDelete: "SET NULL",
+});
+
+TBLMessages.belongsTo(TBLUser, {
+  foreignKey: 'senderID',
+  onDelete: "SET NULL",
+});
+
+TBLRole.hasMany(TBLUser, {
+  foreignKey: 'roleID',
+});
+
 TBLUser.hasMany(TBLScript, {
-    foreignKey: 'assignedTo',
-    onDelete: "SET NULL",
+  foreignKey: 'authorID',
+});
+
+TBLUser.hasMany(TBLScript, {
+  foreignKey: 'assignedTo',
 });
 
 TBLUser.hasMany(TBLMessages, {
-    foreignKey: 'receiverID',
-    onDelete: "SET NULL",
+  foreignKey: 'receiverID',
 });
 
 TBLUser.hasMany(TBLMessages, {
-    foreignKey: 'senderID',
-    onDelete: "SET NULL",
+  foreignKey: 'senderID',
 });
 
 module.exports = { TBLMessages, TBLRole, TBLScript, TBLSearchHistory, TBLUser};
