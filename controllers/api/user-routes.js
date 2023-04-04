@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
       "firstName": "Abed",
       "lastName": "Abed",
       "roleTitle": "writer",
-      "email": "abed.abed@hotmail.com",
+      "emailAddress": "abed.abed@hotmail.com",
       "password": "12$123_2abc"
     }
   */
@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       roleID: roleId,
-      email: req.body.email,
+      emailAddress: req.body.emailAddress,
       password: req.body.password,
     });
     req.session.save(() => {
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
   try {
     const userData = await TBLUser.findOne({
       where: {
-        email: req.body.email,
+        emailAddress: req.body.emailAddress,
       },
     });
 
