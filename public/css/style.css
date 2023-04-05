@@ -58,15 +58,21 @@ body {
     border:none;
     background:none;
     margin: 15px;
+    color:  #565656;
+    cursor: pointer;
     
 }
 .notif-button {
     border:none;
     background:none;
     margin: 15px;
+    color:  #565656;
+    cursor: pointer;
 }
 .log-off-button {
     border:none;
     background:none;
     margin: 15px;
+    color:  #565656;
+    cursor: pointer;
 }
