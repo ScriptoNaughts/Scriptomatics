@@ -54,3 +54,19 @@ body {
 #nav {
     align-items: center;
 }
+.home-button {
+    border:none;
+    background:none;
+    margin: 15px;
+    
+}
+.notif-button {
+    border:none;
+    background:none;
+    margin: 15px;
+}
+.log-off-button {
+    border:none;
+    background:none;
+    margin: 15px;
+}
