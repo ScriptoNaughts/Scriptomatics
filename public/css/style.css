@@ -1,0 +1,72 @@
+@media screen and (max-width: 1024px) {
+    main.main-container {
+        margin: 0 1.2rem;
+    }
+}
+
+#title {
+    color: #565656;
+    font-family: 'Bebas Neue', sans-serif;
+    padding-left: 0;
+}
+
+.navbar {
+    background-color: #BABFCD;
+    height: 10vh;
+}
+
+#logo, #logo-img, #title {
+
+    padding-bottom: 0;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+/* #logo-img {
+    padding-top: 7px;
+} */
+
+#menu-sidebar {
+    background-color: #BABFCD;
+    
+}
+
+body {
+    position: relative;
+}
+
+#main {
+    margin: 0;
+    height: 90vh;
+}
+
+.li-nav {
+    float: right;
+  }
+
+#nav, #nav-logo, #nav-menu {
+    margin:0;
+    background-color: #BABFCD;
+    padding:0;
+}
+
+
+#nav {
+    align-items: center;
+}
+.home-button {
+    border:none;
+    background:none;
+    margin: 15px;
+    
+}
+.notif-button {
+    border:none;
+    background:none;
+    margin: 15px;
+}
+.log-off-button {
+    border:none;
+    background:none;
+    margin: 15px;
+}
