@@ -60,8 +60,11 @@ body {
     cursor: pointer;
     
 }
-
  
 #create-button {
     float:right;
+}
+
+#menu-sidebar {
+    min-width: 120px;
 }
