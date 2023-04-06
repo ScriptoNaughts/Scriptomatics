@@ -23,11 +23,13 @@ TBLScript.belongsTo(TBLUser, {
 
 TBLMessages.belongsTo(TBLUser, {
   foreignKey: "receiverID",
+  as: "receiver",
   onDelete: "SET NULL",
 });
 
 TBLMessages.belongsTo(TBLUser, {
   foreignKey: "senderID",
+  as: "sender",
   onDelete: "SET NULL",
 });
 

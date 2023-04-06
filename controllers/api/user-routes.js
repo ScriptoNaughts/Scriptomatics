@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
 
     // Checks if there are any users
     if (!userData) {
-      res.status(404).json({ message: "No users exist" });
+      res.status(404).json({ message: "No users found" });
       return;
     }
     res.status(200).json(userData);
