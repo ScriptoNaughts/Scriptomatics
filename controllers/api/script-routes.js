@@ -1,6 +1,46 @@
 const router = require("express").Router();
 const { TBLUser, TBLScript } = require("../../models");
 
+// GET all scripts and their associated Author and Assigned Agent
+router.get("/", async (req, res) => {
+  try {
+    const scriptData = await TBLScript.findAll({
+      include: [
+        { model: TBLUser, as: "Author" },
+        { model: TBLUser, as: "Assignee" },
+      ],
+    });
+
+    if (!scriptData) {
+      res.status(404).json();
+      return;
+    }
+    res.status(200).json(scriptData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET a specified script and it's associated Author and Assigned Agent
+router.get("/:id", async (req, res) => {
+  try {
+    const scriptData = await TBLScript.findByPk(req.params.id, {
+      include: [
+        { model: TBLUser, as: "Author" },
+        { model: TBLUser, as: "Assignee" },
+      ],
+    });
+
+    if (!scriptData) {
+      res.status(404).json();
+      return;
+    }
+    res.status(200).json(scriptData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // POST create a new script
 router.post("/", async (req, res) => {
   /* req.body should look like this...
@@ -21,14 +61,19 @@ router.post("/", async (req, res) => {
       return;
     }
 
-    const scriptData = await TBLScript.create({
-      authorID: req.session.userID, // obtains the user's ID from the current logged in session object (the user's Id is added in the POST routes in the user-routes file)
-      title: req.body.title,
-      description: req.body.description,
-      text: req.body.text,
-      status: req.body.status,
-      assignedTo: null,
-    });
+    const scriptData = await TBLScript.create(
+      {
+        authorID: req.session.userID, // obtains the user's ID from the current logged in session object (the user's Id is added in the POST routes in the user-routes file)
+        title: req.body.title,
+        description: req.body.description,
+        text: req.body.text,
+        status: req.body.status,
+        assignedTo: null,
+      },
+      {
+        include: [{ model: TBLUser, as: "Author" }],
+      }
+    );
 
     res.status(200).json(scriptData);
   } catch (err) {
@@ -52,6 +97,7 @@ router.put("/:id", async (req, res) => {
         where: {
           id: req.params.id,
         },
+        include: [{ model: TBLUser, as: "Author" }],
       }
     );
 
@@ -94,6 +140,10 @@ router.put("/purchase/:id", async (req, res) => {
           status: "published", // make sure the script is posted to the marketplace
           assignedTo: null, // make sure the script hasn't already been purchased
         },
+        include: [
+          { model: TBLUser, as: "Author" },
+          { model: TBLUser, as: "Assignee" },
+        ],
       }
     );
 
