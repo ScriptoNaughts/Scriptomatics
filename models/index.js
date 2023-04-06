@@ -11,11 +11,6 @@ TBLUser.belongsTo(TBLRole, {
 
 TBLScript.belongsTo(TBLUser, {
   foreignKey: "authorID",
-  onDelete: "SET NULL",
-});
-
-TBLScript.belongsTo(TBLUser, {
-  foreignKey: "authorID",
   as: "Author",
   onDelete: "SET NULL",
 });
