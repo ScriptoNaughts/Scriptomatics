@@ -41,6 +41,64 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// GET route to get all the scripts written by any author whose name (first or last or combination) is included in the client's search term
+router.get("/author/:name", async (req, res) => {
+  try {
+    // Get the search term from the URL parameter and remove any whitespace
+    const searchName = req.params.name.replace(/\s/g, "");
+
+    // Find the role with the title "writer" in the TBLRole table
+    const role = await TBLRole.findOne({
+      where: { roleTitle: "writer" },
+    });
+
+    // Find all users who have a "writer" role
+    const authorData = await TBLUser.findAll({
+      where: { roleID: role.id },
+    });
+
+    if (!authorData) {
+      res.status(404).json({ message: "No authors found" });
+      return;
+    }
+
+    // This array will store all the script records for the specified author(s)
+    const scriptsData = [];
+
+    // Loop through all the writers
+    for (const author of authorData) {
+      // Combine the first and last names of the author's record into one string, removing any whitespace
+      const authorName = (author.firstName + author.lastName).replace(/\s/g,"");
+
+      // Check if the clinet's search term is included in the combined first and last name of the author's record
+      if (authorName.includes(searchName)) {
+        // If the search term is included, find all the script records written by that author
+        const authorScripts = await TBLScript.findAll({
+          where: { authorID: author.id },
+          include: [
+            { model: TBLUser, as: "Author" },
+            { model: TBLUser, as: "Assignee" },
+          ],
+        });
+
+        // Add all the author's scripts to the array
+        scriptsData.push(...authorScripts);
+      }
+    }
+
+    if (!scriptsData || scriptsData.length === 0) {
+      res
+        .status(404)
+        .json({ message: "No scripts found for selected author(s)" });
+      return;
+    }
+
+    res.status(200).json(scriptsData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // POST create a new script
 router.post("/", async (req, res) => {
   /* req.body should look like this...
