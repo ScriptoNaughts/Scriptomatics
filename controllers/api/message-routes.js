@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const { TBLUser, TBLMessages } = require("../../models");
 
 // GET all the users that the requesting user has chatted with
@@ -12,16 +13,27 @@ router.get("/users", async (req, res) => {
       return;
     }
 
+    // Finds all users that the requesting user has sent or received messages from
     const users = await TBLMessages.findAll({
       where: {
-        senderID: req.session.userID, // obtains the user's ID from the current logged in session object (the user's Id is added in the POST routes in the user-routes file)
+        // obtains the requesting user's ID from the current logged in session object
+        [Op.or]: [
+          { senderID: req.session.userID },
+          { receiverID: req.session.userID },
+        ],
       },
-      attributes: ["receiverID"], // only retrieves the receiverID from the TBLMessages model
-      group: ["receiverID"], // Groups the receiverID to prevent duplicate receiverID's being returned
+      attributes: ["senderID", "receiverID"], // retrieves the senderID & receiverID from the TBLMessages model
+      group: ["senderID", "receiverID"], // Groups the senderID & receiverID to prevent duplicates being returned
       include: [
         {
           model: TBLUser,
-          attributes: ["id", "email"], // the id and email attributes should be placed as data attributes in the handlebars. This will allows us to use the data-attributes as parameters when making a GET request for the chat with a single user
+          as: "sender",
+          attributes: ["id", "emailAddress"], // the id and emailAddress attributes should be placed as data attributes in the handlebars. This will allows us to use the data-attributes as parameters when making a GET request for the chat with a specific user
+        },
+        {
+          model: TBLUser,
+          as: "receiver",
+          attributes: ["id", "emailAddress"],
         },
       ],
     });
@@ -64,8 +76,10 @@ router.get("/user/chat/:id", async (req, res) => {
     // Finds all the chat history between the sender and the receiver
     const messageHistory = await TBLMessages.findAll({
       where: {
-        senderID: req.session.userID,
-        receiverID: receiver.id,
+        [Op.or]: [
+          { senderID: req.session.userID, receiverID: receiver.id },
+          { senderID: receiver.id, receiverID: req.session.userID },
+        ],
       },
       order: [["timeStamp", "DESC"]], // This will load the response in order of most recent messages
       limit: 50, // This will load the last 50 messages because if the chat history is large it will cause performance issues
@@ -87,7 +101,7 @@ router.get("/user/chat/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   /* req.body should look like this...
     {
-      "email": "abed.abed@hotmail.com",
+      "receiverID": 1,
       "content": "Hey, I just saw your script for Harry Potter and wanted to ask you some questions on it", 
     }
   */
@@ -102,7 +116,7 @@ router.post("/", async (req, res) => {
 
     const receiver = await TBLUser.findOne({
       where: {
-        email: req.body.email,
+        id: req.body.receiverID,
       },
     });
 
