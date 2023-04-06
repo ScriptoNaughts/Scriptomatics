@@ -49,7 +49,6 @@ TBLUser.init(
     },
     roleID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate:{
         notEmpty: true,
       },
