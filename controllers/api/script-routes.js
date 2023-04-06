@@ -45,7 +45,7 @@ router.get("/:id", async (req, res) => {
 router.get("/author/:name", async (req, res) => {
   try {
     // Get the search term from the URL parameter and remove any whitespace
-    const searchName = req.params.name.replace(/\s/g, "");
+    const searchName = req.params.name.replace(/\s/g, "").toLowerCase();
 
     // Find the role with the title "writer" in the TBLRole table
     const role = await TBLRole.findOne({
@@ -68,7 +68,9 @@ router.get("/author/:name", async (req, res) => {
     // Loop through all the writers
     for (const author of authorData) {
       // Combine the first and last names of the author's record into one string, removing any whitespace
-      const authorName = (author.firstName + author.lastName).replace(/\s/g,"");
+      const authorName = (author.firstName + author.lastName)
+        .replace(/\s/g, "")
+        .toLowerCase();
 
       // Check if the clinet's search term is included in the combined first and last name of the author's record
       if (authorName.includes(searchName)) {

@@ -79,9 +79,13 @@ TBLUser.init(
     hooks: {
       beforeCreate: async (newUserData) => {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        newUserData.firstName = newUserData.firstName.toLowerCase();
+        newUserData.lastName = newUserData.lastName.toLowerCase();
         return newUserData;
       },
       beforeUpdate: async (updatedUserData) => {
+        updatedUserData.firstName = updatedUserData.firstName.toLowerCase();
+        updatedUserData.lastName = updatedUserData.lastName.toLowerCase();
         if (updatedUserData.password) {
           updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
         }
