@@ -1,6 +1,9 @@
 // Import necessary dependencies
+const path = require("path");
 const express = require("express");
 const session = require("express-session");
+// The express-handlebars package will allow us to render handlebar views
+const exphbs = require("express-handlebars");
 
 // Initializes Sequelize with session store
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
@@ -33,9 +36,17 @@ const sess = {
 // Set up middleware with the session configuration 
 app.use(session(sess));
 
+// Create an instance of the handlebars engine and set it as the view engine for Express
+const hbs = exphbs.create({});
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
+
 // Parse incoming JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// This will allow us to serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, "public")));
 
 // Use routes defined in the controllers folder
 app.use(routes);
