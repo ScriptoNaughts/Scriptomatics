@@ -41,17 +41,17 @@
           <div class="navbar-item">
             <button class="home-button">
               <span class="icon is-small">
-                <i class="fa fa-home fa-2x"></i>
+                <a class="fa fa-home fa-2x"></a>
               </span>
             </button>
             <button class="notif-button">
               <span class="icon is-small">
-                <i class="fa fa-bell fa-lg"></i>
+                <a class="fa fa-bell fa-lg"></a>
               </span>
             </button>
             <button class="log-off-button">
               <span class="icon is-small">
-                <i class="fa fa-sign-out fa-2x"></i>
+                <a class="fa fa-sign-out fa-2x"></a>
               </span>
             </button>
           </div>
@@ -73,12 +73,58 @@
         </aside>
       </div>
       <main class="column">
-        <div id="welcome">
-          <h2 class="is-size-3 is-size-4-mobile">Welcome to your homepage!</h2>
-          <p>
-            As a screenplay agent, you can view your purchased scripts, search
-            for new scripts and check your messages.
-          </p>
+        <div id="browse">
+          <form id="search-script">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="Find a script" />
+              </p>
+              <p class="control">
+                <a class="button is-info"> Search </a>
+              </p>
+            </div>
+
+            <div class="field is-grouped">
+              <label class="label">Search by:&nbsp;</label>
+              <div class="control is-expended">
+                <label class="radio">
+                  <input type="radio" name="answer" id="genre" checked />
+                  Genre
+                </label>
+              </div>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="answer" id="keyword" />
+                  Keyword
+                </label>
+              </div>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="answer" id="author" />
+                  Author
+                </label>
+              </div>
+            </div>
+          </form>
+          <div id="search-results">
+            <div class="card" id="search-result">
+              <div class="card-content">
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a href="#">@bulmaio</a>. <a href="#">#css</a>
+                  <a href="#">#responsive</a>
+                  <br />
+                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">Add to Cart</a>
+                <a href="#" class="card-footer-item">Add to Wishlist</a>
+              </footer>
+            </div>
+            <br />
+          </div>
         </div>
       </main>
     </div>
