@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
       password: req.body.password,
     });
 
-    // set up a session with indicating that the new user is logged in and stores this user's ID
+    // set up a session indicating that the new user is logged in and stores this user's ID
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
