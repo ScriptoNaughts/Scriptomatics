@@ -4,7 +4,7 @@
     }
 }
 
-#title {
+#title #purchased-title #messages-title #browse-title {
     color: #565656;
     font-family: 'Bebas Neue', sans-serif;
     padding-left: 0;
@@ -22,9 +22,6 @@
     padding-left: 0.5rem;
 }
 
-/* #logo-img {
-    padding-top: 7px;
-} */
 
 #menu-sidebar {
     background-color: #BABFCD;
@@ -54,7 +51,8 @@ body {
 #nav {
     align-items: center;
 }
-.home-button {
+
+.home-button, .notif-button, .log-off-button {
     border:none;
     background:none;
     margin: 15px;
@@ -62,18 +60,4 @@ body {
     cursor: pointer;
     
 }
-.notif-button {
-    border:none;
-    background:none;
-    margin: 15px;
-    color:  #565656;
-    cursor: pointer;
-}
-.log-off-button {
-    border:none;
-    background:none;
-    margin: 15px;
-    color:  #565656;
-    cursor: pointer;
-}
-
+ 
