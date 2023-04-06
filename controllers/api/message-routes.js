@@ -67,7 +67,7 @@ router.get("/user/chat/:id", async (req, res) => {
         senderID: req.session.userID,
         receiverID: receiver.id,
       },
-      order: [["timeStamp", "ASC"]], // Orders the chat with the newest messages at the bottom
+      order: [["timeStamp", "DESC"]], // This will load the response in order of most recent messages
       limit: 50, // This will load the last 50 messages because if the chat history is large it will cause performance issues
     });
 
@@ -123,3 +123,5 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+module.exports = router;
