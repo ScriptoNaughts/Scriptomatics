@@ -13,7 +13,41 @@ router.get("/", async (req, res) => {
 // GET request to render the homepage for the writer or agent once they are logged in
 router.get("/homepage", async (req, res) => {
   try {
-    res.render("homepage", { loggedIn: req.session.loggedIn });
+    /* userData follows the following format:
+      [
+    {
+        "id": 1,
+        "firstName": "abed",
+        "lastName": "abed",
+        "roleID": 1,
+        "password": "$2b$10$CNRYhfDAviaeaN2RM1xE/uBpbH3aXfe0dWdtfgXb.cw4rklis1dPi",
+        "emailAddress": "abed.abed@hotmail.com",
+        "createdAt": "2023-04-06T23:40:44.000Z",
+        "updatedAt": "2023-04-06T23:40:44.000Z",
+        "TBLRole": {
+            "id": 1,
+            "roleTitle": "writer",
+            "createdAt": "2023-04-06T23:39:41.000Z",
+            "updatedAt": "2023-04-06T23:39:41.000Z"
+        },
+    }] */
+
+    const userData = await TBLUser.findByPk(req.session.userID, {
+      include: [
+        {
+          model: TBLRole,
+        },
+      ],
+      attributes: { exclude: ["password"] }, // exclude the password since we do not want to return sensitive information
+    });
+
+    // Check if a user is found with the requested ID
+    if (!userData) {
+      return res.status(404).json({ message: "User data not found" });
+    }
+
+    // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
+    res.render("homepage", { userData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
