@@ -92,6 +92,10 @@ router.post("/", async (req, res) => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
 
+      // redirect to homepage after saving session
+      res.redirect("/homepage");
+
+      // send response with JSON data
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -176,6 +180,9 @@ router.post("/login", async (req, res) => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
 
+      // redirect the user to the homepage after saving the session
+      res.redirect("/homepage");
+
       res
         .status(200)
         .json({ user: userData, message: "You are now logged in!" });
@@ -190,7 +197,8 @@ router.post("/logout", async (req, res) => {
   // destroys the session associated with the client that made the request
   if (req.session.loggedIn) {
     req.session.destroy(() => {
-      res.status(204).end();
+      // redirect the user back to the main-page
+      res.redirect("/");
     });
   } else {
     res.status(404).end();
