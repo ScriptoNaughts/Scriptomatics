@@ -4,10 +4,10 @@
     }
 }
 
-#title #purchased-title #messages-title #browse-title {
+#main-title, #purchased-title, #messages-title, #browse-title {
     color: #565656;
     font-family: 'Bebas Neue', sans-serif;
-    padding-left: 0;
+    
 }
 
 .navbar {
@@ -15,7 +15,7 @@
     height: 10vh;
 }
 
-#logo, #logo-img, #title {
+#logo, #logo-img {
 
     padding-bottom: 0;
     padding-top: 0.5rem;
@@ -61,8 +61,12 @@ body {
     
 }
  
-#create-button {
+
+#create-button, #save-button {
     float:right;
+    color:  #565656;
+    cursor: pointer;
+    padding-left: 10px;
 }
 
 #menu-sidebar {
