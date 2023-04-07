@@ -68,8 +68,18 @@ router.get("/scripts/writer", async (req, res) => {
         "assignedTo": null,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
+         "Assignee": {
+            "id": 2,
+            "firstName": "graham",
+            "lastName": "graham",
+            "roleID": 2,
+            "emailAddress": "graham.graham@hotmail.com",
+            "createdAt": "2023-04-06T23:41:14.000Z",
+            "updatedAt": "2023-04-06T23:41:14.000Z"
+        }
     }
 ]*/
+    // Finds all the scripts the requesting writer (user) published (purchased and non-purchased)
     const scriptData = await TBLScript.findAll({
       where: {
         writerID: req.session.userID,
@@ -102,7 +112,51 @@ router.get("/scripts/writer", async (req, res) => {
 // GET request to render the scripts page where the agents can view their puchased scripts
 router.get("/scripts/agent", async (req, res) => {
   try {
-    res.render("scripts", { loggedIn: req.session.loggedIn });
+    /* scriptData follows the following format:
+[
+    {
+        "id": 1,
+        "authorID": 1,
+        "title": "Harry Potter",
+        "description": "Harry Potter, fictional character, a boy wizard ",
+        "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
+        "status": "draft",
+        "assignedTo": null,
+        "createdAt": "2023-04-06T23:45:55.000Z",
+        "updatedAt": "2023-04-06T23:45:55.000Z",
+        "Author": {
+            "id": 1,
+            "firstName": "abed",
+            "lastName": "abed",
+            "roleID": 1,
+            "emailAddress": "abed.abed@hotmail.com",
+            "createdAt": "2023-04-06T23:40:44.000Z",
+            "updatedAt": "2023-04-06T23:40:44.000Z"
+        }
+    }
+]*/
+
+    // Finds all the scripts the requested agent (user) purchased
+    const scriptData = await TBLScript.findAll({
+      where: {
+        assignedTo: req.session.userID,
+        status: "purchased",
+      },
+      include: [
+        {
+          // returns the information of the writers of their purchased scripts
+          model: TBLUser,
+          as: "Writer",
+          attributes: { exclude: ["password"] }, // exclude's the writers password as that is sensitive information
+        },
+      ],
+    });
+
+    if (!scriptData) {
+      return res.status(404).json({ message: "No script data found" });
+    }
+
+    res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
