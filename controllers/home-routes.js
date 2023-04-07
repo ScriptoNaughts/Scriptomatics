@@ -20,7 +20,6 @@ router.get("/homepage", async (req, res) => {
         "firstName": "abed",
         "lastName": "abed",
         "roleID": 1,
-        "password": "$2b$10$CNRYhfDAviaeaN2RM1xE/uBpbH3aXfe0dWdtfgXb.cw4rklis1dPi",
         "emailAddress": "abed.abed@hotmail.com",
         "createdAt": "2023-04-06T23:40:44.000Z",
         "updatedAt": "2023-04-06T23:40:44.000Z",
@@ -57,7 +56,43 @@ router.get("/homepage", async (req, res) => {
 // GET request to render the scripts page where the writers can view their posted scripts
 router.get("/scripts/writer", async (req, res) => {
   try {
-    res.render("scripts", { loggedIn: req.session.loggedIn });
+    /* scriptData follows the following format:
+[
+    {
+        "id": 1,
+        "authorID": 1,
+        "title": "Harry Potter",
+        "description": "Harry Potter, fictional character, a boy wizard ",
+        "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
+        "status": "draft",
+        "assignedTo": null,
+        "createdAt": "2023-04-06T23:45:55.000Z",
+        "updatedAt": "2023-04-06T23:45:55.000Z",
+    }
+]*/
+    const scriptData = await TBLScript.findAll({
+      where: {
+        writerID: req.session.userID,
+        status: {
+          // only return published or purchased scripts (not drafts)
+          [Op.or]: ["published", "purchased"],
+        },
+      },
+      include: [
+        {
+          // returns the information of the user who purchased their script
+          model: TBLUser,
+          as: "Assignee",
+          attributes: { exclude: ["password"] }, // exclude's the agents password as that is sensitive information
+        },
+      ],
+    });
+
+    if (!scriptData) {
+      return res.status(404).json({ message: "No script data found" });
+    }
+
+    res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
