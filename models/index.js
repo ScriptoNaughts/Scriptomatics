@@ -10,8 +10,8 @@ TBLUser.belongsTo(TBLRole, {
 });
 
 TBLScript.belongsTo(TBLUser, {
-  foreignKey: "authorID",
-  as: "Author",
+  foreignKey: "writerID",
+  as: "Writer",
   onDelete: "SET NULL",
 });
 
@@ -38,8 +38,8 @@ TBLRole.hasMany(TBLUser, {
 });
 
 TBLUser.hasMany(TBLScript, {
-  foreignKey: "authorID",
-  as: "AuthoredScripts",
+  foreignKey: "writerID",
+  as: "WriterScripts",
 });
 
 TBLUser.hasMany(TBLScript, {

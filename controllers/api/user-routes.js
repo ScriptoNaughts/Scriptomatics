@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
         },
         {
           model: TBLScript,
-          as: "AuthoredScripts",
+          as: "WriterScripts",
         },
         {
           model: TBLScript,
@@ -41,7 +41,7 @@ router.get("/:id", async (req, res) => {
         },
         {
           model: TBLScript,
-          as: "AuthoredScripts",
+          as: "WriterScripts",
         },
         {
           model: TBLScript,

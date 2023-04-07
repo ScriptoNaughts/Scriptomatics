@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const { TBLUser, TBLScript } = require("../../models");
 
-// GET all scripts and their associated Author and Assigned Agent
+// GET all scripts and their associated Writer and Assigned Agent
 router.get("/", async (req, res) => {
   try {
     const scriptData = await TBLScript.findAll({
       include: [
-        { model: TBLUser, as: "Author" },
+        { model: TBLUser, as: "Writer" },
         { model: TBLUser, as: "Assignee" },
       ],
     });
@@ -21,12 +21,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET a specified script and it's associated Author and Assigned Agent
+// GET a specified script and it's associated Writer and Assigned Agent
 router.get("/:id", async (req, res) => {
   try {
     const scriptData = await TBLScript.findByPk(req.params.id, {
       include: [
-        { model: TBLUser, as: "Author" },
+        { model: TBLUser, as: "Writer" },
         { model: TBLUser, as: "Assignee" },
       ],
     });
@@ -41,8 +41,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// GET route to get all the scripts written by any author whose name (first or last or combination) is included in the client's search term
-router.get("/author/:name", async (req, res) => {
+// GET route to get all the scripts written by any writer whose name (first or last or combination) is included in the client's search term
+router.get("/writer/:name", async (req, res) => {
   try {
     // Get the search term from the URL parameter and remove any whitespace
     const searchName = req.params.name.replace(/\s/g, "").toLowerCase();
@@ -53,45 +53,45 @@ router.get("/author/:name", async (req, res) => {
     });
 
     // Find all users who have a "writer" role
-    const authorData = await TBLUser.findAll({
+    const writerData = await TBLUser.findAll({
       where: { roleID: role.id },
     });
 
-    if (!authorData) {
-      res.status(404).json({ message: "No authors found" });
+    if (!writerData) {
+      res.status(404).json({ message: "No writers found" });
       return;
     }
 
-    // This array will store all the script records for the specified author(s)
+    // This array will store all the script records for the specified writer(s)
     const scriptsData = [];
 
     // Loop through all the writers
-    for (const author of authorData) {
-      // Combine the first and last names of the author's record into one string, removing any whitespace
-      const authorName = (author.firstName + author.lastName)
+    for (const writer of writerData) {
+      // Combine the first and last names of the writer's record into one string, removing any whitespace
+      const writerName = (writer.firstName + writer.lastName)
         .replace(/\s/g, "")
         .toLowerCase();
 
-      // Check if the clinet's search term is included in the combined first and last name of the author's record
-      if (authorName.includes(searchName)) {
-        // If the search term is included, find all the script records written by that author
-        const authorScripts = await TBLScript.findAll({
-          where: { authorID: author.id },
+      // Check if the clinet's search term is included in the combined first and last name of the writer's record
+      if (writerName.includes(searchName)) {
+        // If the search term is included, find all the script records written by that writer
+        const writerScripts = await TBLScript.findAll({
+          where: { writerID: writer.id },
           include: [
-            { model: TBLUser, as: "Author" },
+            { model: TBLUser, as: "Writer" },
             { model: TBLUser, as: "Assignee" },
           ],
         });
 
-        // Add all the author's scripts to the array
-        scriptsData.push(...authorScripts);
+        // Add all the writer's scripts to the array
+        scriptsData.push(...writerScripts);
       }
     }
 
     if (!scriptsData || scriptsData.length === 0) {
       res
         .status(404)
-        .json({ message: "No scripts found for selected author(s)" });
+        .json({ message: "No scripts found for selected writer(s)" });
       return;
     }
 
@@ -123,7 +123,7 @@ router.post("/", async (req, res) => {
 
     const scriptData = await TBLScript.create(
       {
-        authorID: req.session.userID, // obtains the user's ID from the current logged in session object (the user's Id is added in the POST routes in the user-routes file)
+        writerID: req.session.userID, // obtains the user's ID from the current logged in session object (the user's Id is added in the POST routes in the user-routes file)
         title: req.body.title,
         description: req.body.description,
         text: req.body.text,
@@ -131,7 +131,7 @@ router.post("/", async (req, res) => {
         assignedTo: null,
       },
       {
-        include: [{ model: TBLUser, as: "Author" }],
+        include: [{ model: TBLUser, as: "Writer" }],
       }
     );
 
@@ -146,7 +146,7 @@ router.put("/:id", async (req, res) => {
   try {
     const updatedScriptData = await TBLScript.update(
       {
-        authorID: req.session.userID, // Set the ID of the user making the request as the authorID
+        writerID: req.session.userID, // Set the ID of the user making the request as the writerID
         title: req.body.title,
         description: req.body.description,
         text: req.body.text,
@@ -157,7 +157,7 @@ router.put("/:id", async (req, res) => {
         where: {
           id: req.params.id,
         },
-        include: [{ model: TBLUser, as: "Author" }],
+        include: [{ model: TBLUser, as: "Writer" }],
       }
     );
 
@@ -201,7 +201,7 @@ router.put("/purchase/:id", async (req, res) => {
           assignedTo: null, // make sure the script hasn't already been purchased
         },
         include: [
-          { model: TBLUser, as: "Author" },
+          { model: TBLUser, as: "Writer" },
           { model: TBLUser, as: "Assignee" },
         ],
       }
