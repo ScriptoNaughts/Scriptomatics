@@ -1,7 +1,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
     <a href="https://bulma.io">
-        <img src="../../assets/logo.png" width="80" id="logo-img" />
+        <img src="../../../assets/logo.png" width="80" id="logo-img" />
     </a>
 
     <a
@@ -22,7 +22,7 @@
         <div class="navbar-item">
         <button class="home-button">
             <span class="icon is-small">
-            <a class="fa fa-home fa-2x"></a>
+            <a class="fa fa-home fa-2x" href="/"></a>
             </span>
         </button>
         <button class="notif-button">
@@ -39,29 +39,3 @@
     </div>
     </div>
 </nav>
-<div class="columns is-mobile" id="main">
-    {{#if role === "writer"}}
-        {{> writer-menu}}
-    {{else}}
-        {{> agent-menu}}
-    {{/if}}
-
-    {{#if page === "agent-browse"}}
-        {{> agent-browse}}
-    {{/if}}
-    {{#if page === "agent-home"}}
-        {{> agent-home}}
-    {{/if}}
-    {{#if page === "agent-purchased"}}
-        {{> agent-purchased}}
-    {{/if}}
-    {{#if page === "writer-home"}}
-        {{> writer-home}}
-    {{/if}}
-    {{#if page === "writer-posted"}}
-        {{> writer-posted}}
-    {{/if}}
-    {{#if page === "writer-workspace"}}
-        {{> writer-workspace}}
-    {{/if}}
-</div>

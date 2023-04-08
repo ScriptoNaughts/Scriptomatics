@@ -3,15 +3,48 @@ const { TBLUser, TBLScript, TBLMessages } = require("../models");
 
 // GET request to render the main page with the login/signup form
 router.get("/", async (req, res) => {
-  if (req.session.loggedIn) {
-    res.redirect("/homepage");
-    return;
+  const isLoggedIn = true;
+
+  if (isLoggedIn) {
+    const isWriter = true;
+
+    if (isWriter) {
+      res.redirect("/writer/home");
+
+      return;
+    } else {
+      res.redirect("/agent/home");
+
+      return;
+    }
   }
-  res.render("mainpage");
+
+  res.render("homepage");
+});
+
+const allowedWriterRoutes = ["home", "posted", "workspace", "messages"];
+
+// GET request to render the homepage for the writer or agent once they are logged in
+router.get("/writer/:route", async (req, res) => {
+  const { route } = req.params;
+
+  const isLoggedIn = true;
+
+  if (!isLoggedIn) {
+    res.redirect("/");
+  }
+
+  if (allowedWriterRoutes.includes(route)) {
+    res.render(`writer-${route}`, { [route]: true });
+  } else {
+    res.redirect("/writer/home");
+  }
 });
 
 // GET request to render the homepage for the writer or agent once they are logged in
-router.get("/homepage", async (req, res) => {
+router.get("/loggedin", async (req, res) => {
+  console.log("here");
+  const page = req.query.page;
   try {
     /* userData follows the following format:
       [
@@ -31,22 +64,40 @@ router.get("/homepage", async (req, res) => {
         },
     }] */
 
-    const userData = await TBLUser.findByPk(req.session.userID, {
-      include: [
-        {
-          model: TBLRole,
-        },
-      ],
-      attributes: { exclude: ["password"] }, // exclude the password since we do not want to return sensitive information
-    });
+    // const userData = await TBLUser.findByPk(req.session.userID, {
+    //   include: [
+    //     {
+    //       model: TBLRole,
+    //     },
+    //   ],
+    //   attributes: { exclude: ["password"] }, // exclude the password since we do not want to return sensitive information
+    // });
 
-    // Check if a user is found with the requested ID
-    if (!userData) {
-      return res.status(404).json({ message: "User data not found" });
-    }
+    // // Check if a user is found with the requested ID
+    // if (!userData) {
+    //   return res.status(404).json({ message: "User data not found" });
+    // }
 
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
-    res.render("homepage", { userData, loggedIn: req.session.loggedIn });
+    res.render("writer-home", {
+      userData: {
+        id: 1,
+        firstName: "abed",
+        lastName: "abed",
+        roleID: 1,
+        emailAddress: "abed.abed@hotmail.com",
+        createdAt: "2023-04-06T23:40:44.000Z",
+        updatedAt: "2023-04-06T23:40:44.000Z",
+        TBLRole: {
+          id: 1,
+          roleTitle: "writer",
+          createdAt: "2023-04-06T23:39:41.000Z",
+          updatedAt: "2023-04-06T23:39:41.000Z",
+        },
+      },
+      isWriter: true,
+      loggedIn: true,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
