@@ -88,6 +88,7 @@ router.delete("/:id", async (req, res) => {
 // Allow a user to login
 router.post("/login", async (req, res) => {
   try {
+    console.log("\n Running user-routes /login \n")
     const userData = await TBLUser.findOne({
       where: {
         emailAddress: req.body.emailAddress,
@@ -119,6 +120,10 @@ router.post("/login", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
+
+      console.log(
+        "\n\nLog in Session in user-routes\n\n" + JSON.stringify(req.session) + "\n\n\n"
+      ); // Output the session data to the console
 
       // redirect the user to the homepage after saving the session
       res.redirect("/loggedin");
