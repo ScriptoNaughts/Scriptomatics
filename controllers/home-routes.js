@@ -62,7 +62,7 @@ router.get("/scripts/writer", async (req, res) => {
 [
     {
         "id": 1,
-        "authorID": 1,
+        "writerID": 1,
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
@@ -86,7 +86,7 @@ router.get("/scripts/writer", async (req, res) => {
 [
     {
         "id": 1,
-        "authorID": 1,
+        "writerID": 1,
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
@@ -135,7 +135,7 @@ router.get("/scripts/agent", async (req, res) => {
 [
     {
         "id": 1,
-        "authorID": 1,
+        "writerID": 1,
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
@@ -143,7 +143,7 @@ router.get("/scripts/agent", async (req, res) => {
         "assignedTo": 2,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
-        "Author": {
+        "Writer": {
             "id": 1,
             "firstName": "abed",
             "lastName": "abed",
@@ -191,7 +191,7 @@ router.get("/browse", async (req, res) => {
 [
     {
         "id": 1,
-        "authorID": 1,
+        "writerID": 1,
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
@@ -199,7 +199,7 @@ router.get("/browse", async (req, res) => {
         "assignedTo": null,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
-        "Author": {
+        "Writer": {
             "id": 1,
             "firstName": "abed",
             "lastName": "abed",
@@ -236,7 +236,7 @@ router.get("/browse", async (req, res) => {
   }
 });
 
-// GET request to render the workspace where authors can work on their scripts
+// GET request to render the workspace where writers can work on their draft scripts
 router.get("/workspace", async (req, res) => {
   try {
     res.render("workspace", { loggedIn: req.session.loggedIn });
@@ -246,7 +246,7 @@ router.get("/workspace", async (req, res) => {
   }
 });
 
-// GET request to render the messages page where authors and agents can view user's who they have interacted with via messages
+// GET request to render the messages page where writers and agents can view user's who they have interacted with via messages
 router.get("/messages", async (req, res) => {
   try {
     res.render("messages", { loggedIn: req.session.loggedIn });
