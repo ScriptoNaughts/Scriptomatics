@@ -164,9 +164,53 @@ router.get("/scripts/agent", async (req, res) => {
 });
 
 // GET request to render the browse page where agents can browse published scripts put on the market
+// When this page is loaded, the user will initially be presented with all the available published scripts. When
+// the user wishes to browse by category, it will trigger the GET routes in the `api` folder
 router.get("/browse", async (req, res) => {
   try {
-    res.render("browse", { loggedIn: req.session.loggedIn });
+    /* scriptData follows the following format:
+[
+    {
+        "id": 1,
+        "authorID": 1,
+        "title": "Harry Potter",
+        "description": "Harry Potter, fictional character, a boy wizard ",
+        "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
+        "status": "draft",
+        "assignedTo": null,
+        "createdAt": "2023-04-06T23:45:55.000Z",
+        "updatedAt": "2023-04-06T23:45:55.000Z",
+        "Author": {
+            "id": 1,
+            "firstName": "abed",
+            "lastName": "abed",
+            "roleID": 1,
+            "emailAddress": "abed.abed@hotmail.com",
+            "createdAt": "2023-04-06T23:40:44.000Z",
+            "updatedAt": "2023-04-06T23:40:44.000Z"
+        }
+    }
+]*/
+
+    // Finds all the scripts that are published to the marketplace
+    const scriptData = await TBLScript.findAll({
+      where: {
+        status: "published",
+      },
+      include: [
+        {
+          // returns the information of the writers of the published scripts
+          model: TBLUser,
+          as: "Writer",
+          attributes: { exclude: ["password"] },
+        },
+      ],
+    });
+
+    if (!scriptData) {
+      return res.status(404).json({ message: "No script data found" });
+    }
+    res.render("browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
