@@ -33,10 +33,10 @@ router.post("/", async (req, res) => {
       req.session.userID = userData.id;
 
       // redirect to homepage after saving session
-      res.redirect("/homepage");
+      res.redirect("/loggedin");
 
-      // send response with JSON data
-      res.status(200).json(userData);
+      // // send response with JSON data
+      // res.status(200).json(userData);
     });
   } catch (err) {
     // Checks if the error is caused due to the validation checks placed in the TBLUser model
@@ -121,11 +121,9 @@ router.post("/login", async (req, res) => {
       req.session.userID = userData.id;
 
       // redirect the user to the homepage after saving the session
-      res.redirect("/homepage");
+      res.redirect("/loggedin");
 
-      res
-        .status(200)
-        .json({ user: userData, message: "You are now logged in!" });
+      // res.status(200).json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(500).json(err);

@@ -4,14 +4,14 @@ const { TBLUser, TBLScript, TBLMessages } = require("../models");
 // GET request to render the main page with the login/signup form
 router.get("/", async (req, res) => {
   if (req.session.loggedIn) {
-    res.redirect("/homepage");
+    res.redirect("/loggedin");
     return;
   }
-  res.render("mainpage");
+  res.render("homepage");
 });
 
 // GET request to render the homepage for the writer or agent once they are logged in
-router.get("/homepage", async (req, res) => {
+router.get("/loggedin", async (req, res) => {
   try {
     /* userData follows the following format:
       [
@@ -31,7 +31,7 @@ router.get("/homepage", async (req, res) => {
         },
     }] */
 
-    const userData = await TBLUser.findByPk(req.session.userID, {
+    let userData = await TBLUser.findByPk(req.session.userID, {
       include: [
         {
           model: TBLRole,
@@ -102,7 +102,7 @@ router.get("/scripts/writer", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requesting writer (user) published (purchased and non-purchased)
-    const scriptData = await TBLScript.findAll({
+    let scriptData = await TBLScript.findAll({
       where: {
         writerID: req.session.userID,
         status: {
@@ -161,7 +161,7 @@ router.get("/scripts/agent", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requested agent (user) purchased
-    const scriptData = await TBLScript.findAll({
+    let scriptData = await TBLScript.findAll({
       where: {
         assignedTo: req.session.userID,
         status: "purchased",
@@ -219,7 +219,7 @@ router.get("/browse", async (req, res) => {
 ]*/
 
     // Finds all the scripts that are published to the marketplace
-    const scriptData = await TBLScript.findAll({
+    let scriptData = await TBLScript.findAll({
       where: {
         status: "published",
       },
@@ -265,7 +265,7 @@ router.get("/workspace", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requesting writer (user) has saved in their drafts
-    const scriptData = await TBLScript.findAll({
+    let scriptData = await TBLScript.findAll({
       where: {
         writerID: req.session.userID,
         status: "draft",
@@ -296,7 +296,7 @@ router.get("/messages", async (req, res) => {
 ]
        */
     // Finds all users that the requesting user has sent to or received messages from (if the requesting user has both sent and received messgaes from a user, then the user will appear twice (once as the sender and once as the receiver))
-    const chatUsers = await TBLMessages.findAll({
+    let chatUsers = await TBLMessages.findAll({
       where: {
         // Checks all message data if the requesting user was the sender or the receiver
         [Op.or]: [
