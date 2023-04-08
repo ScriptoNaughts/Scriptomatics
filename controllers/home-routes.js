@@ -305,7 +305,7 @@ router.get("/messages", async (req, res) => {
         ],
       },
       attributes: ["senderID", "receiverID"], // retrieves the senderID & receiverID from the TBLMessages model
-      group: ["senderID", "receiverID"], // Groups the senderID & receiverID to prevent duplicates of the same data being returned (same sender & receiver but different message content)
+      group: ["senderID", "receiverID"], // Groups the senderID & receiverID to prevent duplicates of the same sender-receiver combination being returned (same sender & receiver but different message content)
       include: [
         {
           model: TBLUser,
