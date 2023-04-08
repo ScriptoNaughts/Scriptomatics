@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { TBLUser, TBLScript, TBLMessages } = require("../models");
+const { TBLUser, TBLScript, TBLMessages, TBLRole } = require("../models");
 
 // GET request to render the main page with the login/signup form
 router.get("/", async (req, res) => {
@@ -31,6 +31,12 @@ router.get("/loggedin", async (req, res) => {
         },
     }] */
 
+    console.log(
+      "\n\nLogin session in home-routes: " +
+        JSON.stringify(req.session) +
+        "\n\n"
+    );
+
     let userData = await TBLUser.findByPk(req.session.userID, {
       include: [
         {
@@ -48,8 +54,14 @@ router.get("/loggedin", async (req, res) => {
     // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
     userData = userData.get({ plain: true });
 
+    console.log(
+      "\n\nData being sent to handlebars:\n" +
+        JSON.stringify(userData, null, 4) +
+        "\n\n"
+    );
+
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
-    res.render("homepage", { userData, loggedIn: req.session.loggedIn });
+    res.render("loggedin", { userData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

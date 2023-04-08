@@ -29,7 +29,7 @@ TBLUser.init(
       unique: true,
       validate: {
         notEmpty: true,
-      }
+      },
     },
     firstName: {
       type: DataTypes.STRING,
@@ -49,7 +49,7 @@ TBLUser.init(
     },
     roleID: {
       type: DataTypes.INTEGER,
-      validate:{
+      validate: {
         notEmpty: true,
       },
       references: {
@@ -87,7 +87,10 @@ TBLUser.init(
         updatedUserData.firstName = updatedUserData.firstName.toLowerCase();
         updatedUserData.lastName = updatedUserData.lastName.toLowerCase();
         if (updatedUserData.password) {
-          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+          updatedUserData.password = await bcrypt.hash(
+            updatedUserData.password,
+            10
+          );
         }
         return updatedUserData;
       },
