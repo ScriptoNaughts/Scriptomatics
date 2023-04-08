@@ -288,7 +288,74 @@ router.get("/workspace", async (req, res) => {
 // GET request to render the messages page where writers and agents can view user's who they have interacted with via messages
 router.get("/messages", async (req, res) => {
   try {
-    res.render("messages", { loggedIn: req.session.loggedIn });
+    /* The returned usersData will be in the following format:
+[
+  { id: 2, firstName: 'abed', lastName: 'abed'},
+  { id: 3, firstName: 'luba', lastName: 'luba'},
+  { id: 3, firstName: 'graham', lastName: 'graham' },
+]
+       */
+    // Finds all users that the requesting user has sent to or received messages from (if the requesting user has both sent and received messgaes from a user, then the user will appear twice (once as the sender and once as the receiver))
+    const chatUsers = await TBLMessages.findAll({
+      where: {
+        // Checks all message data if the requesting user was the sender or the receiver
+        [Op.or]: [
+          { senderID: req.session.userID },
+          { receiverID: req.session.userID },
+        ],
+      },
+      attributes: ["senderID", "receiverID"], // retrieves the senderID & receiverID from the TBLMessages model
+      group: ["senderID", "receiverID"], // Groups the senderID & receiverID to prevent duplicates of the same sender-receiver combination being returned (same sender & receiver but different message content)
+      include: [
+        {
+          model: TBLUser,
+          as: "sender",
+          attributes: ["id", "firstName", "lastName"], // the id should be placed as data attributes in the handlebars. This will allows us to use the data-attributes as parameters when making a GET request to retrieve the chat with a specified user
+        },
+        {
+          model: TBLUser,
+          as: "receiver",
+          attributes: ["id", "firstName", "lastName"],
+        },
+      ],
+    });
+
+    // Checks if any users were found
+    if (!chatUsers) {
+      res.status(404).json({ message: "No users found." });
+      return;
+    }
+
+    chatUsers = chatUsers.get({ plain: true });
+
+    // This array will contain all the users the requesting user has sent to or received messages from WITHOUT duplicates of users appearing once as the sender and once as the receiver
+    const usersData = [];
+
+    chatUsers.forEach((chat) => {
+      if (
+        chat.senderID !== req.session.userID && // Ensures the sender is not the requesting user since we want to only find who the requesting user interacted with
+        !usersData.some((user) => user.id === chat.senderID) // Ensures the senderID is not already in userData
+      ) {
+        usersData.push({
+          id: chat.senderID,
+          firstName: chat.sender.firstName,
+          lastName: chat.sender.lastName,
+        });
+      }
+
+      if (
+        chat.receiverID !== req.session.userID && // Ensures the receiver is not the requesting user since we want to only find who the requesting user interacted with
+        !usersData.some((user) => user.id === chat.receiverID) /// Ensures the receiverID is not already in userData
+      ) {
+        usersData.push({
+          id: chat.receiverID,
+          firstName: chat.sender.firstName,
+          lastName: chat.sender.lastName,
+        });
+      }
+    });
+
+    res.render("messages", { usersData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
