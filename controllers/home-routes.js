@@ -239,7 +239,34 @@ router.get("/browse", async (req, res) => {
 // GET request to render the workspace where writers can work on their draft scripts
 router.get("/workspace", async (req, res) => {
   try {
-    res.render("workspace", { loggedIn: req.session.loggedIn });
+    /* scriptData follows the following format:
+[
+    {
+        "id": 1,
+        "writerID": 1,
+        "title": "Harry Potter",
+        "description": "Harry Potter, fictional character, a boy wizard ",
+        "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
+        "status": "draft",
+        "assignedTo": null,
+        "createdAt": "2023-04-06T23:45:55.000Z",
+        "updatedAt": "2023-04-06T23:45:55.000Z",
+    }
+]*/
+
+    // Finds all the scripts the requesting writer (user) has saved in their drafts
+    const scriptData = await TBLScript.findAll({
+      where: {
+        writerID: req.session.userID,
+        status: "draft",
+      },
+    });
+
+    if (!scriptData) {
+      return res.status(404).json({ message: "No script data found" });
+    }
+
+    res.render("workspace", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
