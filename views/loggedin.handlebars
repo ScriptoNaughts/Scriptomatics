@@ -1,0 +1,67 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+    <a href="https://bulma.io">
+        <img src="../../assets/logo.png" width="80" id="logo-img" />
+    </a>
+
+    <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navMenu"
+    >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+    </div>
+
+    <div class="navbar-menu" id="navMenu">
+    <div class="navbar-end">
+        <div class="navbar-item">
+        <button class="home-button">
+            <span class="icon is-small">
+            <a class="fa fa-home fa-2x"></a>
+            </span>
+        </button>
+        <button class="notif-button">
+            <span class="icon is-small">
+            <a class="fa fa-bell fa-lg"></a>
+            </span>
+        </button>
+        <button class="log-off-button">
+            <span class="icon is-small">
+            <a class="fa fa-sign-out fa-2x"></a>
+            </span>
+        </button>
+        </div>
+    </div>
+    </div>
+</nav>
+<div class="columns is-mobile" id="main">
+    {{#if role === "writer"}}
+        {{> writer-menu}}
+    {{else}}
+        {{> agent-menu}}
+    {{/if}}
+
+    {{#if page === "agent-browse"}}
+        {{> agent-browse}}
+    {{/if}}
+    {{#if page === "agent-home"}}
+        {{> agent-home}}
+    {{/if}}
+    {{#if page === "agent-purchased"}}
+        {{> agent-purchased}}
+    {{/if}}
+    {{#if page === "writer-home"}}
+        {{> writer-home}}
+    {{/if}}
+    {{#if page === "writer-posted"}}
+        {{> writer-posted}}
+    {{/if}}
+    {{#if page === "writer-workspace"}}
+        {{> writer-workspace}}
+    {{/if}}
+</div>
