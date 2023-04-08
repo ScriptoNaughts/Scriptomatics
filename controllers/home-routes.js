@@ -56,7 +56,9 @@ router.get("/homepage", async (req, res) => {
 // GET request to render the scripts page where the writers can view their posted scripts
 router.get("/scripts/writer", async (req, res) => {
   try {
-    /* scriptData follows the following format:
+    /* scriptData follows the following 2 format:
+
+    --- purchased script ---
 [
     {
         "id": 1,
@@ -64,8 +66,8 @@ router.get("/scripts/writer", async (req, res) => {
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
-        "status": "draft",
-        "assignedTo": null,
+        "status": "purchased",
+        "assignedTo": 2,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
          "Assignee": {
@@ -78,7 +80,24 @@ router.get("/scripts/writer", async (req, res) => {
             "updatedAt": "2023-04-06T23:41:14.000Z"
         }
     }
+]
+
+    --- published script (not yet purchased) ---
+[
+    {
+        "id": 1,
+        "authorID": 1,
+        "title": "Harry Potter",
+        "description": "Harry Potter, fictional character, a boy wizard ",
+        "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
+        "status": "published",
+        "assignedTo": null,
+        "createdAt": "2023-04-06T23:45:55.000Z",
+        "updatedAt": "2023-04-06T23:45:55.000Z",
+        "Assignee": null
+    }
 ]*/
+
     // Finds all the scripts the requesting writer (user) published (purchased and non-purchased)
     const scriptData = await TBLScript.findAll({
       where: {
@@ -120,8 +139,8 @@ router.get("/scripts/agent", async (req, res) => {
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
-        "status": "draft",
-        "assignedTo": null,
+        "status": "purchased",
+        "assignedTo": 2,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
         "Author": {
@@ -176,7 +195,7 @@ router.get("/browse", async (req, res) => {
         "title": "Harry Potter",
         "description": "Harry Potter, fictional character, a boy wizard ",
         "text": "Dumbledore zaps all the light out of the lampposts. He puts away the device and a cat meows. Dumbledore looks down at the cat.",
-        "status": "draft",
+        "status": "published",
         "assignedTo": null,
         "createdAt": "2023-04-06T23:45:55.000Z",
         "updatedAt": "2023-04-06T23:45:55.000Z",
