@@ -3,20 +3,18 @@ const { TBLUser, TBLScript, TBLMessages } = require("../models");
 
 // GET request to render the main page with the login/signup form
 router.get("/", async (req, res) => {
-  const isLoggedIn = true;
+  const isLoggedIn = true; //TODO: Check if session is active
 
   if (isLoggedIn) {
-    const isWriter = true;
+    const isWriter = true; //TODO: Check user type
 
     if (isWriter) {
       res.redirect("/writer/home");
-
-      return;
     } else {
       res.redirect("/agent/home");
-
-      return;
     }
+
+    return;
   }
 
   res.render("homepage");
@@ -24,20 +22,41 @@ router.get("/", async (req, res) => {
 
 const allowedWriterRoutes = ["home", "posted", "workspace", "messages"];
 
-// GET request to render the homepage for the writer or agent once they are logged in
+// GET request to render the homepage for the writer once they are logged in
 router.get("/writer/:route", async (req, res) => {
   const { route } = req.params;
 
-  const isLoggedIn = true;
+  const isLoggedIn = true; //TODO: Check if session is active
 
   if (!isLoggedIn) {
     res.redirect("/");
+    return;
   }
 
   if (allowedWriterRoutes.includes(route)) {
     res.render(`writer-${route}`, { [route]: true });
   } else {
     res.redirect("/writer/home");
+  }
+});
+
+const allowedAgentRoutes = ["home", "purchased", "browse", "messages"];
+
+// GET request to render the homepage for the agent once they are logged in
+router.get("/agent/:route", async (req, res) => {
+  const { route } = req.params;
+
+  const isLoggedIn = true; // TODO: Check if session is active
+
+  if (!isLoggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  if (allowedAgentRoutes.includes(route)) {
+    res.render(`agent-${route}`, { [route]: true });
+  } else {
+    res.redirect("/agent/home");
   }
 });
 
