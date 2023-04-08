@@ -45,6 +45,9 @@ router.get("/homepage", async (req, res) => {
       return res.status(404).json({ message: "User data not found" });
     }
 
+    // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
+    userData = userData.get({ plain: true });
+
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
     res.render("homepage", { userData, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -121,6 +124,8 @@ router.get("/scripts/writer", async (req, res) => {
       return res.status(404).json({ message: "No script data found" });
     }
 
+    scriptData = scriptData.get({ plain: true });
+
     res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
@@ -174,6 +179,8 @@ router.get("/scripts/agent", async (req, res) => {
     if (!scriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
+
+    scriptData = scriptData.get({ plain: true });
 
     res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -229,6 +236,9 @@ router.get("/browse", async (req, res) => {
     if (!scriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
+
+    scriptData = scriptData.get({ plain: true });
+
     res.render("browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
@@ -265,6 +275,8 @@ router.get("/workspace", async (req, res) => {
     if (!scriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
+
+    scriptData = scriptData.get({ plain: true });
 
     res.render("workspace", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
