@@ -256,7 +256,7 @@ router.get("/browse", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("browse", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
