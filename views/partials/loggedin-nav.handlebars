@@ -1,6 +1,6 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-    <a href="https://bulma.io">
+    <a href="/">
         <img src="../../../assets/logo.png" width="80" id="logo-img" />
     </a>
 
@@ -39,3 +39,33 @@
     </div>
     </div>
 </nav>
+<div class="columns is-mobile" id="main">
+    {{#if (eq userData.TBLRole.roleTitle "writer")}}
+        {{> writer-menu}}
+
+        {{> writer-home}}
+    {{else}}
+        {{> agent-menu}}
+
+        {{> agent-home}}
+    {{/if}}
+
+    {{!-- {{#if page === "agent-browse"}}
+        {{> agent-browse}}
+    {{/if}}
+    {{#if page === "agent-home"}}
+        {{> agent-home}}
+    {{/if}}
+    {{#if page === "agent-purchased"}}
+        {{> agent-purchased}}
+    {{/if}}
+    {{#if page === "writer-home"}}
+        {{> writer-home}}
+    {{/if}}
+    {{#if page === "writer-posted"}}
+        {{> writer-posted}}
+    {{/if}}
+    {{#if page === "writer-workspace"}}
+        {{> writer-workspace}}
+    {{/if}} --}}
+</div>

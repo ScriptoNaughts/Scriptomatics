@@ -33,10 +33,10 @@ router.post("/", async (req, res) => {
       req.session.userID = userData.id;
 
       // redirect to homepage after saving session
-      res.redirect("/homepage");
+      res.redirect("/loggedin");
 
-      // send response with JSON data
-      res.status(200).json(userData);
+      // // send response with JSON data
+      // res.status(200).json(userData);
     });
   } catch (err) {
     // Checks if the error is caused due to the validation checks placed in the TBLUser model
@@ -88,6 +88,7 @@ router.delete("/:id", async (req, res) => {
 // Allow a user to login
 router.post("/login", async (req, res) => {
   try {
+    console.log("\n Running user-routes /login \n")
     const userData = await TBLUser.findOne({
       where: {
         emailAddress: req.body.emailAddress,
@@ -120,12 +121,14 @@ router.post("/login", async (req, res) => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
 
-      // redirect the user to the homepage after saving the session
-      res.redirect("/homepage");
+      console.log(
+        "\n\nLog in Session in user-routes\n\n" + JSON.stringify(req.session) + "\n\n\n"
+      ); // Output the session data to the console
 
-      res
-        .status(200)
-        .json({ user: userData, message: "You are now logged in!" });
+      // redirect the user to the homepage after saving the session
+      res.redirect("/loggedin");
+
+      // res.status(200).json({ user: userData, message: "You are now logged in!" });
     });
   } catch (err) {
     res.status(500).json(err);
