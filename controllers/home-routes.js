@@ -295,7 +295,10 @@ router.get("/workspace", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("workspace", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("writer-workspace", {
+      scriptData,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
