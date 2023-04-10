@@ -30,11 +30,13 @@
             <a class="fa fa-bell fa-lg"></a>
             </span>
         </button>
-        <button class="log-off-button">
-            <span class="icon is-small">
-            <a class="fa fa-sign-out fa-2x"></a>
-            </span>
-        </button>
+        <form method="POST" action="/api/users/logout">
+            <button class="log-off-button" >
+                <span class="icon is-small">
+                <a class="fa fa-sign-out fa-2x"></a>
+                </span>
+            </button>
+        </form>
         </div>
     </div>
     </div>
