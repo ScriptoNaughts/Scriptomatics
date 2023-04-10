@@ -24,7 +24,7 @@ const sess = {
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // sets the maximum age for the cookie to be valid. Here, the cookie (and session) will expire after one day.
     httpOnly: true, // Only allow HTTP communication for cookie (session cookie can only be accessed by the server and not by client-side scripts, which helps to prevent XSS attacks)
-    secure: true, // Only initialize session cookies when the protocol being used is HTTPS
+    secure: false, // initialize session cookies when the protocol being used is HTTP or HTTPS
     sameSite: "strict", // Cookie only sent to the same site as the request origin
   },
   resave: false, // Only saves session if changes are made
