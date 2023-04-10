@@ -117,7 +117,7 @@ router.get("/scripts/writer", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requesting writer (user) published (purchased and non-purchased)
-    let scriptData = await TBLScript.findAll({
+    let dbScriptData = await TBLScript.findAll({
       where: {
         writerID: req.session.userID,
         status: {
@@ -135,11 +135,13 @@ router.get("/scripts/writer", async (req, res) => {
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    scriptData = scriptData.get({ plain: true });
+    const scriptData = dbScriptData.map((script) =>
+      script.get({ plain: true })
+    );
 
     res.render("writer-scripts", {
       scriptData,
@@ -179,7 +181,7 @@ router.get("/scripts/agent", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requested agent (user) purchased
-    let scriptData = await TBLScript.findAll({
+    let dbScriptData = await TBLScript.findAll({
       where: {
         assignedTo: req.session.userID,
         status: "purchased",
@@ -194,11 +196,13 @@ router.get("/scripts/agent", async (req, res) => {
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    scriptData = scriptData.get({ plain: true });
+    const scriptData = dbScriptData.map((script) =>
+      script.get({ plain: true })
+    );
 
     res.render("agent-scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -237,7 +241,7 @@ router.get("/browse", async (req, res) => {
 ]*/
 
     // Finds all the scripts that are published to the marketplace
-    let scriptData = await TBLScript.findAll({
+    let dbScriptData = await TBLScript.findAll({
       where: {
         status: "published",
       },
@@ -251,11 +255,13 @@ router.get("/browse", async (req, res) => {
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    scriptData = scriptData.get({ plain: true });
+    const scriptData = dbScriptData.map((script) =>
+      script.get({ plain: true })
+    );
 
     res.render("agent-browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -283,18 +289,20 @@ router.get("/workspace", async (req, res) => {
 ]*/
 
     // Finds all the scripts the requesting writer (user) has saved in their drafts
-    let scriptData = await TBLScript.findAll({
+    let dbScriptData = await TBLScript.findAll({
       where: {
         writerID: req.session.userID,
         status: "draft",
       },
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    scriptData = scriptData.get({ plain: true });
+    const scriptData = dbScriptData.map((script) =>
+      script.get({ plain: true })
+    );
 
     res.render("writer-workspace", {
       scriptData,
@@ -317,7 +325,7 @@ router.get("/messages", async (req, res) => {
 ]
        */
     // Finds all users that the requesting user has sent to or received messages from (if the requesting user has both sent and received messgaes from a user, then the user will appear twice (once as the sender and once as the receiver))
-    let chatUsers = await TBLMessages.findAll({
+    let dbChatUsers = await TBLMessages.findAll({
       where: {
         // Checks all message data if the requesting user was the sender or the receiver
         [Op.or]: [
@@ -342,12 +350,12 @@ router.get("/messages", async (req, res) => {
     });
 
     // Checks if any users were found
-    if (!chatUsers) {
+    if (!dbChatUsers) {
       res.status(404).json({ message: "No users found." });
       return;
     }
 
-    chatUsers = chatUsers.get({ plain: true });
+    const chatUsers = dbChatUsers.map((user) => user.get({ plain: true }));
 
     // This array will contain all the users the requesting user has sent to or received messages from WITHOUT duplicates of users appearing once as the sender and once as the receiver
     const usersData = [];
