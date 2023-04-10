@@ -1,0 +1,150 @@
+@media screen and (max-width: 1024px) {
+    main.main-container {
+        margin: 0 1.2rem;
+    }
+}
+
+#title #purchased-title #messages-title #browse-title {
+    color: #565656;
+    font-family: 'Bebas Neue', sans-serif;
+    padding-left: 0;
+}
+
+.navbar {
+    background-color: #BABFCD;
+    height: 20vh;
+}
+
+#logo, #logo-img, #title {
+
+    padding-bottom: 0;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+/* #logo-img {
+    padding-top: 7px;
+} */
+
+#menu-sidebar {
+    background-color: #BABFCD;
+    
+}
+
+body {
+    position: relative;
+    height: 100vh;
+}
+
+#main {
+    margin: 0;
+    height: 90vh;
+}
+
+.li-nav {
+    float: right;
+  }
+
+#nav, #nav-logo, #nav-menu {
+    margin:0;
+    background-color: #BABFCD;
+    padding:0;
+}
+
+
+#nav {
+    align-items: center;
+}
+
+
+nav h1 {
+    font-size: 60px;
+    color: white;
+    font-family: 'Bebas Neue', cursive;
+    padding: 50px 0px 0px 50px;
+}
+
+.content aside {
+    display: flex;
+    float: left;
+    padding: 20px 450px 600px 20px;
+    border: solid rgb(141, 136, 136) 2px;
+}
+
+.content {
+    display: flex;
+    padding: 20px 50px 630px 20px;
+    border: solid rgb(141, 136, 136)   2px;
+    height: 80vh;
+}
+/*
+.home-button, .notif-button, .log-off-button {
+    border:none;
+    background:none;
+    margin: 15px;
+    color:  #565656;
+    cursor: pointer;
+    
+}
+*/
+ 
+#create-button {
+    float:right;
+}
+
+.noteTitle {
+    border: solid 1px #BABFCD;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 26px;
+    padding: 0px 0px 30px 0px;
+    border-style: dashed;
+    
+}
+
+.noteText {
+    display: block;
+    border: 1px solid #BABFCD;
+    font-size: 25px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    height: 100%;
+    border-style: groove;
+    
+    padding-bottom: 100px;
+}
+
+.textContent {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+    
+}
+
+.textArea {
+    flex: 1;
+    margin: 20px 0px 0px 20px;
+    
+    padding-bottom: 100px;
+}
+
+.textTitle {
+    margin: 20px 0px 0px 20px;
+    
+}
+
+.submitBtn {
+    margin: 20px 0px 0px 25px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #BABFCD;
+    color: white;
+    border: transparent;
+    cursor: grab;
+}
+
+.container {
+    background-color: red;
+}
+
