@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Op } = require("sequelize");
 const { TBLUser, TBLScript, TBLMessages, TBLRole } = require("../models");
 
 // GET request to render the main page with the login/signup form

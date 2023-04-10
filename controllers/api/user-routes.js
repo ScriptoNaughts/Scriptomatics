@@ -86,9 +86,9 @@ router.delete("/:id", async (req, res) => {
 });
 
 // Allow a user to login
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   try {
-    console.log("\n Running user-routes /login \n")
+    console.log("\n Running user-routes /login \n");
     const userData = await TBLUser.findOne({
       where: {
         emailAddress: req.body.emailAddress,
@@ -115,9 +115,12 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
-    // user is successfully logged in, and a userID keeping track of the id of the logged in user
-    req.session.save(() => {
+    // Regenerate the session to prevent session fixation
+    req.session.regenerate(function (err) {
+      if (err) next(err);
+
+      // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
+      // user is successfully logged in, and a userID keeping track of the id of the logged in user
       req.session.loggedIn = true;
       req.session.userID = userData.id;
 
@@ -125,10 +128,11 @@ router.post("/login", async (req, res) => {
         "\n\nLog in Session in user-routes\n\n" + JSON.stringify(req.session) + "\n\n\n"
       ); // Output the session data to the console
 
-      // redirect the user to the homepage after saving the session
-      res.redirect("/loggedin");
-
-      // res.status(200).json({ user: userData, message: "You are now logged in!" });
+      // save the session before redirection to ensure page load does not happen before session is saved
+      req.session.save(function (err) {
+        if (err) return next(err);
+        res.redirect("/loggedin");
+      });
     });
   } catch (err) {
     res.status(500).json(err);
@@ -136,12 +140,23 @@ router.post("/login", async (req, res) => {
 });
 
 // Allow a user to logout
-router.post("/logout", async (req, res) => {
-  // destroys the session associated with the client that made the request
+router.post("/logout", async (req, res, next) => {
+  // Check if user is logged in
   if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      // redirect the user back to the main-page
-      res.redirect("/");
+    // clear the user data from the session object and save.
+    // this will ensure that re-using the old session id
+    // does not have a logged in user
+    req.session.loggedIn = null;
+    req.session.userID = null;
+    req.session.save(function (err) {
+      if (err) next(err);
+
+      // regenerate the session to help guard against forms of session fixation
+      req.session.regenerate(function (err) {
+        if (err) next(err);
+        // Redirect to home page after successfully logging out
+        res.redirect("/");
+      });
     });
   } else {
     res.status(404).end();
