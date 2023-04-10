@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.cdnfonts.com/css/bebas-neue" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/9819181378.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -14,7 +18,7 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link rel="stylesheet" href="../css/style.css" />
-    <title>Scriptomatic - Agent</title>
+    <title>Scriptomatic - Writer</title>
   </head>
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -41,17 +45,17 @@
           <div class="navbar-item">
             <button class="home-button">
               <span class="icon is-small">
-                <i class="fa fa-home fa-2x"></i>
+                <a class="fa fa-home fa-2x"></a>
               </span>
             </button>
             <button class="notif-button">
               <span class="icon is-small">
-                <i class="fa fa-bell fa-lg"></i>
+                <a class="fa fa-bell fa-lg"></a>
               </span>
             </button>
             <button class="log-off-button">
               <span class="icon is-small">
-                <i class="fa fa-sign-out fa-2x"></i>
+                <a class="fa fa-sign-out fa-2x"></a>
               </span>
             </button>
           </div>
@@ -59,29 +63,60 @@
       </div>
     </nav>
 
-    <div class="columns is-mobile" id="main">
-      <div class="column is-2 is-tablet" id="menu-sidebar">
-        <aside class="menu">
-          <ul class="menu-list">
-            <li><a class="is-size-5 is-size-6-mobile">Browse</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Purchased Scripts</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Cart</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Wishlist</a></li>
-
-            <li><a class="is-size-5 is-size-6-mobile">Messages</a></li>
-          </ul>
-        </aside>
-      </div>
-      <main class="column">
-        <div id="welcome">
-          <h2 class="is-size-3 is-size-4-mobile">Welcome to your homepage!</h2>
-          <p>
-            As a screenplay agent, you can view your purchased scripts, search
-            for new scripts and check your messages.
-          </p>
+    <main>
+      <div id="workspace">
+        <h1
+          class="is-size-2 is-size-4-mobile has-text-weight-bold pl-5"
+          id="purchased-title"
+        >
+          Workspace
+        </h1>
+        <div class="pl-5 pr-5 columns">
+          <div class="column">
+            <a class="fa-solid fa-plus fa-lg" id="create-button"></a>
+            <a class="fa-solid fa-floppy-disk fa-lg" id="save-button"></a>
+            <!-- <button class="button is-normal is-responsive" id="create-button">
+              Create new script
+            </button> -->
+          </div>
         </div>
-      </main>
-    </div>
+        <div class="pl-5 pr-5 columns">
+          <div class="column is-one-third" id="draft-scripts">
+            <div class="card" id="purchased-script">
+              <div class="card-content">
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a href="#">@bulmaio</a>. <a href="#">#css</a>
+                  <a href="#">#responsive</a>
+                  <br />
+                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column" id="view-script">
+            <form>
+              <div class="field">
+                <div class="control pb-1">
+                  <input
+                    class="input is-large"
+                    type="text"
+                    placeholder="Script title"
+                  />
+                </div>
+                <div class="control">
+                  <textarea
+                    class="textarea is-large"
+                    placeholder="Script text"
+                  ></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", () => {

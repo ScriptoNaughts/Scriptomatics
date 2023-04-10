@@ -14,7 +14,7 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link rel="stylesheet" href="../css/style.css" />
-    <title>Scriptomatic - Agent</title>
+    <title>Scriptomatic - Writer</title>
   </head>
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -41,17 +41,17 @@
           <div class="navbar-item">
             <button class="home-button">
               <span class="icon is-small">
-                <i class="fa fa-home fa-2x"></i>
+                <a class="fa fa-home fa-2x"></a>
               </span>
             </button>
             <button class="notif-button">
               <span class="icon is-small">
-                <i class="fa fa-bell fa-lg"></i>
+                <a class="fa fa-bell fa-lg"></a>
               </span>
             </button>
             <button class="log-off-button">
               <span class="icon is-small">
-                <i class="fa fa-sign-out fa-2x"></i>
+                <a class="fa fa-sign-out fa-2x"></a>
               </span>
             </button>
           </div>
@@ -63,22 +63,39 @@
       <div class="column is-2 is-tablet" id="menu-sidebar">
         <aside class="menu">
           <ul class="menu-list">
-            <li><a class="is-size-5 is-size-6-mobile">Browse</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Purchased Scripts</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Cart</a></li>
-            <li><a class="is-size-5 is-size-6-mobile">Wishlist</a></li>
-
+            <li><a class="is-size-5 is-size-6-mobile">Posted Scripts</a></li>
+            <li><a class="is-size-5 is-size-6-mobile">Workspace</a></li>
             <li><a class="is-size-5 is-size-6-mobile">Messages</a></li>
           </ul>
         </aside>
       </div>
       <main class="column">
-        <div id="welcome">
-          <h2 class="is-size-3 is-size-4-mobile">Welcome to your homepage!</h2>
-          <p>
-            As a screenplay agent, you can view your purchased scripts, search
-            for new scripts and check your messages.
-          </p>
+        <div id="purchased" class="pl-4">
+          <h1
+            class="is-size-1 is-size-3-mobile has-text-weight-bold pb-5"
+            id="purchased-title"
+          >
+            Posted Scripts
+          </h1>
+
+          <div id="purchased-scripts">
+            <div class="card" id="purchased-script">
+              <div class="card-content">
+                <div class="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a href="#">@bulmaio</a>. <a href="#">#css</a>
+                  <a href="#">#responsive</a>
+                  <br />
+                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item">View</a>
+              </footer>
+            </div>
+            <br />
+          </div>
         </div>
       </main>
     </div>

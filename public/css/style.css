@@ -4,10 +4,10 @@
     }
 }
 
-#title {
+#main-title, #purchased-title, #messages-title, #browse-title {
     color: #565656;
     font-family: 'Bebas Neue', sans-serif;
-    padding-left: 0;
+    
 }
 
 .navbar {
@@ -15,16 +15,13 @@
     height: 10vh;
 }
 
-#logo, #logo-img, #title {
+#logo, #logo-img {
 
     padding-bottom: 0;
     padding-top: 0.5rem;
     padding-left: 0.5rem;
 }
 
-/* #logo-img {
-    padding-top: 7px;
-} */
 
 #menu-sidebar {
     background-color: #BABFCD;
@@ -54,19 +51,24 @@ body {
 #nav {
     align-items: center;
 }
-.home-button {
+
+.home-button, .notif-button, .log-off-button {
     border:none;
     background:none;
     margin: 15px;
+    color:  #565656;
+    cursor: pointer;
     
 }
-.notif-button {
-    border:none;
-    background:none;
-    margin: 15px;
+ 
+
+#create-button, #save-button {
+    float:right;
+    color:  #565656;
+    cursor: pointer;
+    padding-left: 10px;
 }
-.log-off-button {
-    border:none;
-    background:none;
-    margin: 15px;
+
+#menu-sidebar {
+    min-width: 120px;
 }

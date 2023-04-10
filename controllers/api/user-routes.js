@@ -1,26 +1,5 @@
 const router = require("express").Router();
-const { TBLUser, TBLRole } = require("../../models");
-
-// GET one user
-router.get("/:id", async (req, res) => {
-  try {
-    const userData = await TBLUser.findByPk(req.params.id, {
-      include: [
-        {
-          model: TBLRole,
-        },
-      ],
-    });
-
-    if (!userData) {
-      res.status(404).json({ message: "No user with this id!" });
-      return;
-    }
-    res.status(200).json(userData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+const { TBLUser, TBLRole, TBLScript } = require("../../models");
 
 // POST create a new user (The password encryption will be done through Hooks in the sequelize model)
 router.post("/", async (req, res) => {
@@ -36,7 +15,7 @@ router.post("/", async (req, res) => {
   try {
     // Find the roleId corresponding to the role title in the request body
     const role = await TBLRole.findOne({
-      where: { title: req.body.roleTitle },
+      where: { roleTitle: req.body.roleTitle },
     });
     const roleId = role ? role.id : null;
 
@@ -47,10 +26,17 @@ router.post("/", async (req, res) => {
       emailAddress: req.body.emailAddress,
       password: req.body.password,
     });
+
+    // set up a session indicating that the new user is logged in and stores this user's ID
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.userID = userData.id;
 
-      res.status(200).json(userData);
+      // redirect to homepage after saving session
+      res.redirect("/loggedin");
+
+      // // send response with JSON data
+      // res.status(200).json(userData);
     });
   } catch (err) {
     // Checks if the error is caused due to the validation checks placed in the TBLUser model
@@ -72,8 +58,7 @@ router.post("/", async (req, res) => {
         }
       });
       res.status(400).json({ errors: errorMessages });
-    }
-    else {
+    } else {
       res.status(400).json(err);
     }
   }
@@ -82,27 +67,28 @@ router.post("/", async (req, res) => {
 // DELETE a user
 router.delete("/:id", async (req, res) => {
   try {
-    const userData = await TBLUser.destroy({
+    const deletedUserData = await TBLUser.destroy({
       where: {
         id: req.params.id,
       },
     });
 
-    // Checks if a user with the requested id exists in the database
-    if (!userData) {
+    // Checks if a user exists in the database with the provided id
+    if (!deletedUserData) {
       res.status(404).json({ message: "No user found with that id!" });
       return;
     }
 
-    res.status(200).json(userData);
+    res.status(200).json({ message: "User deleted successfully" });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // Allow a user to login
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res, next) => {
   try {
+    console.log("\n Running user-routes /login \n");
     const userData = await TBLUser.findOne({
       where: {
         emailAddress: req.body.emailAddress,
@@ -129,14 +115,24 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
-    // user is successfully logged in
-    req.session.save(() => {
-      req.session.loggedIn = true;
+    // Regenerate the session to prevent session fixation
+    req.session.regenerate(function (err) {
+      if (err) next(err);
 
-      res
-        .status(200)
-        .json({ user: userData, message: "You are now logged in!" });
+      // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
+      // user is successfully logged in, and a userID keeping track of the id of the logged in user
+      req.session.loggedIn = true;
+      req.session.userID = userData.id;
+
+      console.log(
+        "\n\nLog in Session in user-routes\n\n" + JSON.stringify(req.session) + "\n\n\n"
+      ); // Output the session data to the console
+
+      // save the session before redirection to ensure page load does not happen before session is saved
+      req.session.save(function (err) {
+        if (err) return next(err);
+        res.redirect("/loggedin");
+      });
     });
   } catch (err) {
     res.status(500).json(err);
@@ -144,13 +140,27 @@ router.post("/login", async (req, res) => {
 });
 
 // Allow a user to logout
-router.post("/logout", async (req, res) => {
-  // destroys the session associated with the client that made the request
+router.post("/logout", async (req, res, next) => {
+  // Check if user is logged in
   if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
+    // clear the user data from the session object and save.
+    // this will ensure that re-using the old session id
+    // does not have a logged in user
+    req.session.loggedIn = null;
+    req.session.userID = null;
+    req.session.save(function (err) {
+      if (err) next(err);
+
+      // regenerate the session to help guard against forms of session fixation
+      req.session.regenerate(function (err) {
+        if (err) next(err);
+        // Redirect to home page after successfully logging out
+        res.redirect("/");
+      });
     });
   } else {
     res.status(404).end();
   }
 });
+
+module.exports = router;

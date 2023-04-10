@@ -15,9 +15,8 @@ TBLScript.init(
         notEmpty: true,
       },
     },
-    authorID: {
+    writerID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate: {
         notEmpty: true,
       },
@@ -59,7 +58,6 @@ TBLScript.init(
     },
     assignedTo: {
         type: DataTypes.INTEGER,
-        allowNull: true,
         defaultValue: null,
         validate:{
           notEmpty: true,

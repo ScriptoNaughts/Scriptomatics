@@ -17,7 +17,6 @@ TBLMessages.init(
     },
     senderID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate: {
         notEmpty: true,
       },
@@ -28,7 +27,6 @@ TBLMessages.init(
     },
     receiverID: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         validate: {
           notEmpty: true,
         },
