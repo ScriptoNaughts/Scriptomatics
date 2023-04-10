@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
     res.redirect("/loggedin");
     return;
   }
+
   res.render("homepage");
 });
 
@@ -61,6 +62,7 @@ router.get("/loggedin", async (req, res) => {
     );
 
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
+
     res.render("loggedin", { userData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
@@ -138,7 +140,10 @@ router.get("/scripts/writer", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("writer-scripts", {
+      scriptData,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -194,7 +199,7 @@ router.get("/scripts/agent", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("scripts", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-scripts", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -251,7 +256,7 @@ router.get("/browse", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("browse", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -290,7 +295,10 @@ router.get("/workspace", async (req, res) => {
 
     scriptData = scriptData.get({ plain: true });
 
-    res.render("workspace", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("writer-workspace", {
+      scriptData,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

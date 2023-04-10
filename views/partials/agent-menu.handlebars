@@ -1,12 +1,12 @@
 <div class="column is-2 is-tablet" id="menu-sidebar">
     <aside class="menu">
         <ul class="menu-list">
-        <li><a class="is-size-5 is-size-6-mobile">Browse</a></li>
-        <li><a class="is-size-5 is-size-6-mobile">Purchased Scripts</a></li>
+        <li><a {{#if browse}}class="is-size-5 is-size-6-mobile is-active" {{else}} class="is-size-5 is-size-6-mobile"{{/if}} href="/browse">Browse</a></li>
+        <li><a {{#if purchased}}class="is-size-5 is-size-6-mobile is-active" {{else}} class="is-size-5 is-size-6-mobile"{{/if}} href="/scripts/agent">Purchased Scripts</a></li>
         <li><a class="is-size-5 is-size-6-mobile">Cart</a></li>
         <li><a class="is-size-5 is-size-6-mobile">Wishlist</a></li>
 
-        <li><a class="is-size-5 is-size-6-mobile">Messages</a></li>
+        <li><a class="is-size-5 is-size-6-mobile" href="/messages">Messages</a></li>
         </ul>
     </aside>
 </div>
