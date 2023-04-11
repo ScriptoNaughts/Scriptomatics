@@ -66,7 +66,7 @@
     <main>
       <div id="workspace">
         <h1
-          class="is-size-2 is-size-4-mobile has-text-weight-bold pl-5"
+          class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5 pl-5"
           id="purchased-title"
         >
           Workspace
@@ -110,40 +110,13 @@
                   ></textarea>
                 </div>
               </div>
-              <button
-                class="fa-solid fa-plus fa-lg"
-                id="create-button"
-              ></button>
-              <button
-                class="fa-solid fa-floppy-disk fa-lg"
-                id="save-button"
-              ></button>
+              <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
+              <div class="fa-solid fa-floppy-disk fa-lg" id="save-button"></div>
             </form>
           </div>
         </div>
       </div>
     </main>
   </body>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Get all "navbar-burger" elements
-      const $navbarBurgers = Array.prototype.slice.call(
-        document.querySelectorAll(".navbar-burger"),
-        0
-      );
-
-      // Add a click event on each of them
-      $navbarBurgers.forEach((el) => {
-        el.addEventListener("click", () => {
-          // Get the target from the "data-target" attribute
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-
-          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-          el.classList.toggle("is-active");
-          $target.classList.toggle("is-active");
-        });
-      });
-    });
-  </script>
+  <script type="application/x-javascript" src="js/workspace.js"></script>
 </html>

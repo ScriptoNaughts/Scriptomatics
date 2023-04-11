@@ -21,21 +21,48 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET a specified script and it's associated Writer and Assigned Agent
-router.get("/:id", async (req, res) => {
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for viewing by the writers and agents.
+router.get("/info/:id", async (req, res) => {
   try {
-    const scriptData = await TBLScript.findByPk(req.params.id, {
+    const dbScriptData = await TBLScript.findByPk(req.params.id, {
       include: [
         { model: TBLUser, as: "Writer" },
         { model: TBLUser, as: "Assignee" },
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       res.status(404).json();
       return;
     }
+
+    // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
+    const scriptData = dbScriptData.get({ plain: true });
+    
     res.render("full-script", { scriptData, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for editing by the writers.
+router.get("/edit/:id", async (req, res) => {
+  try {
+    const dbScriptData = await TBLScript.findByPk(req.params.id, {
+      include: [
+        { model: TBLUser, as: "Writer" },
+        { model: TBLUser, as: "Assignee" },
+      ],
+    });
+
+    if (!dbScriptData) {
+      res.status(404).json();
+      return;
+    }
+
+    const scriptData = dbScriptData.get({ plain: true });
+
+    res.status(200).json(scriptData);
   } catch (err) {
     res.status(500).json(err);
   }
