@@ -62,11 +62,7 @@ router.get("/edit/:id", async (req, res) => {
 
     const scriptData = dbScriptData.get({ plain: true });
 
-    console.log("\n\nScript Data" + scriptData + "\n\n");
-    res.render("draft-edit-script", {
-      scriptData,
-      loggedIn: req.session.loggedIn,
-    });
+    res.status(200).json(scriptData);
   } catch (err) {
     res.status(500).json(err);
   }
