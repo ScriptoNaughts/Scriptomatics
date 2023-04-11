@@ -8,22 +8,9 @@
         </h1>
 
         <div id="purchased-scripts">
-        <div class="card" id="purchased-script">
-            <div class="card-content">
-            <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-                <a href="#">@bulmaio</a>. <a href="#">#css</a>
-                <a href="#">#responsive</a>
-                <br />
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>
-            </div>
-            <footer class="card-footer">
-            <a href="#" class="card-footer-item">View</a>
-            </footer>
-        </div>
-        <br />
+        {{#each scriptData as |script|}}
+            {{> script-card}}
+        {{/each}}
         </div>
     </div>
 </main>
