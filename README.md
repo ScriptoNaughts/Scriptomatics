@@ -77,3 +77,5 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 
 <!-- CONTRIBUTING -->
 ## Contributing
+![image](https://user-images.githubusercontent.com/112664790/231309981-b3982f00-2c7d-480c-88cb-d237fe3500cb.png)
+
