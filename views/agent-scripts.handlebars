@@ -1,7 +1,20 @@
-{{> loggedin-nav}}
-
 <div class="columns is-mobile" id="main">
     {{> agent-menu}}
 
-    {{> agent-purchased}}
+    <main class="column">
+    <div id="purchased" class="pl-4">
+        <h1
+        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
+        id="purchased-title"
+        >
+        Purchased Scripts
+        </h1>
+
+        <div id="purchased-scripts">
+        {{#each scriptData as |script|}}
+            {{> agent-purchased}}
+        {{/each}}
+        </div>
+    </div>
+</main>
 </div> 
