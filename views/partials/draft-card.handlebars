@@ -1,13 +1,15 @@
 <div class="card" id="purchased-script">
     <header class="card-header">
-        <p class="card-header-title">{{title}}</p>
+        <p class="card-header-title script-title">{{title}}</p>
     </header>
     <div class="card-content">
-        <div class="content">
+        <div class="content script-description">
             {{description}}
         </div>
     </div>
     <footer class="card-footer">
-        <a href="/api/scripts/edit/{{id}}" class="card-footer-item">Edit</a>
+        <a href="/api/scripts/edit/{{id}}" class="card-footer-item edit-button" data-id={{id}}>Edit</a>
     </footer>
 </div>
+
+{{!-- <script type="application/x-javascript" src="js/draft-card.js"></script> --}}

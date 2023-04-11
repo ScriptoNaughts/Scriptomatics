@@ -56,12 +56,6 @@ router.get("/loggedin", async (req, res) => {
     // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
     userData = userData.get({ plain: true });
 
-    console.log(
-      "\n\nData being sent to handlebars:\n" +
-        JSON.stringify(userData, null, 4) +
-        "\n\n"
-    );
-
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
 
     res.render("loggedin", { userData, loggedIn: req.session.loggedIn });

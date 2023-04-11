@@ -22,7 +22,7 @@
                 type="text"
                 placeholder="Script title"
                 id="title"
-                value={{title}}
+                value={{scriptData.title}}
               />
             </div>
             <div class="control pb-1">
@@ -31,7 +31,7 @@
                 type="text"
                 placeholder="Script description"
                 id="description"
-                value={{description}}
+                value={{scriptData.description}}
               />
             </div>
             <div class="control">
@@ -39,7 +39,7 @@
                 class="textarea is-large"
                 placeholder="Script text"
                 id="text"
-              >{{text}}</textarea>
+              >{{scriptData.text}}</textarea>
             </div>
           </div>
           <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
