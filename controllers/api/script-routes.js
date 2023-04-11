@@ -19,7 +19,7 @@ router.get("/view/:id", async (req, res) => {
     // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
     const scriptData = dbScriptData.get({ plain: true });
     
-    res.render("full-script", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("full-script", { scriptData, userRole: req.session.userRole });
   } catch (err) {
     res.status(500).json(err);
   }
