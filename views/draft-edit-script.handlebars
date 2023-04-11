@@ -41,12 +41,16 @@
                 id="text"
               >{{scriptData.text}}</textarea>
             </div>
+            <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
+            {{!-- <div class="fa-solid fa-floppy-disk fa-lg" id="save-button"></div> --}}
+            <div class="fa-solid fa-floppy-disk fa-lg" id="save-button" data-id={{scriptData.id}}></div>
           </div>
-          <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
-          <div class="fa-solid fa-floppy-disk fa-lg" id="save-button" data-id={{id}}></div>
+          {{!-- <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
+          <div class="fa-solid fa-floppy-disk fa-lg" id="save-button"></div>
+          <div class="fa-solid fa-floppy-disk fa-lg" id="save-button" data-id={{scriptData.id}}></div> --}}
         </div>
       </div>
     </div>
   </div>
 </main>
-<script type="application/x-javascript" src="js/workspace.js"></script>
+{{!-- <script type="application/x-javascript" src="js/workspace.js"></script> --}}

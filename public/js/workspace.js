@@ -1,7 +1,7 @@
-var saveButtonEl = document.querySelector('#save-button');
-var titleEl = document.querySelector('#title');
-var textEl = document.querySelector('#text');
-var descriptionEl = document.querySelector('#description');
+var saveButtonEl = document.querySelector('.save-button');
+var titleEl = document.querySelector('.title');
+var textEl = document.querySelector('.text');
+var descriptionEl = document.querySelector('.description');
 
 var saveButtonHandler = async (event) => {
     event.preventDefault();
