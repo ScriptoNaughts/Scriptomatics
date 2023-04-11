@@ -1,17 +1,32 @@
 <div class="columns is-mobile" id="main">
-  {{! //Shows the full information for the script }}
+  {{> writer-menu}}
+
   <main class="column">
+    <a href="#" onclick="history.back()">
+      <i class="fa fa-arrow-circle-left fa-3x"></i>
+    </a>
     <div id="full-script-info" class="pl-4">
-      <h1
-        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
-        id="script-title"
-      >{{scriptData.title}}</h1>
-      <section id="script-text">{{scriptData.text}}</section>
-      <section>Written by:
-        {{scriptData.Writer.firstName}}
-        {{scriptData.Writer.lastName}}.</section>
-      <footer>
-        <button onclick="history.back()">Go back!</button>
+      <h1 class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5" id="script-title">
+        {{scriptData.title}}
+      </h1>
+      <h2 class="is-size-4 is-size-5-mobile has-text-weight-medium mb-3" id="script-description">
+        {{scriptData.description}}
+      </h2>
+      <p id="script-text" class="is-size-5 is-size-6-mobile">
+        {{scriptData.text}}
+      </p>
+      <div class="mt-5">
+        <p class="is-size-6 is-size-7-mobile has-text-weight-medium mb-1">
+          Written by:
+        </p>
+        <p class="is-size-6 is-size-7-mobile">
+          {{scriptData.Writer.firstName}} {{scriptData.Writer.lastName}}
+        </p>
+      </div>
+      <footer class="mt-5">
+        <button class="button is-info is-light" onclick="history.back()">
+          Go back!
+        </button>
       </footer>
     </div>
   </main>
