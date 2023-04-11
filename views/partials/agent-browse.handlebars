@@ -1,52 +1,14 @@
-<main class="column">
-    <div id="browse" class="pl-4">
-        <h1 class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5" id="browse-title">Browse</h1>
-        <form id="search-script">
-            <div class="field is-grouped">
-                <p class="control is-expanded">
-                    <input class="input search-bar" type="text" placeholder="Find a script" />
-                </p>
-                <p class="control">
-                <a class="button is-info search-button"> Search </a>
-                </p>
-            </div>
-
-            <div class="field is-grouped">
-                <label class="label">Search by:&nbsp;</label>
-                <div class="control is-expended">
-                <label class="radio">
-                    <input type="radio" name="answer" id="genre" />
-                    Genre
-                </label>
-                </div>
-                <div class="control">
-                <label class="radio">
-                    <input type="radio" name="answer" id="keyword" />
-                    Keyword
-                </label>
-                </div>
-                <div class="control">
-                <label class="radio">
-                    <input type="radio" name="answer" id="author" checked/>
-                    Author
-                </label>
-                </div>
-            </div>
-        </form>
-        <div id="search-results">
-            <div class="card" id="search-result">
-                <div class="card-content">
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Phasellus nec iaculis mauris.
-                        <a href="#">@bulmaio</a>. <a href="#">#css</a>
-                        <a href="#">#responsive</a>
-                        <br />
-                        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="card mb-4" id="search-result" data-id={{id}}>
+  <div class="card-content">
+    <div class="script-details mb-2">
+      <p class="title is-4">{{title}}</p>
+      <p class="subtitle is-6">{{description}}</p>
     </div>
-</main>
-<script type="application/x-javascript" src="js/agent-browse.js"></script>
+    <div class="content">
+      <p><strong>Author:</strong>
+        {{Writer.firstName}} {{Writer.lastName}}</p>
+      <p>{{text}}</p>
+      {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
+    </div>
+  </div>
+</div>

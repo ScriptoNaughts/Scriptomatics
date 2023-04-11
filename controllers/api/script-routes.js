@@ -102,7 +102,10 @@ router.get("/writer/:name", async (req, res) => {
       if (writerName.includes(searchName)) {
         // If the search term is included, find all the script records written by that writer
         const dbWriterScripts = await TBLScript.findAll({
-          where: { writerID: writer.id },
+          where: {
+            writerID: writer.id,
+            status: "published",
+          },
           include: [
             { model: TBLUser, as: "Writer" },
             { model: TBLUser, as: "Assignee" },
