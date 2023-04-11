@@ -1,16 +1,23 @@
-<main class="column">
-    <div id="posted" class="pl-4">
-        <h1
-        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
-        id="posted-title"
-        >
-        Posted Scripts
-        </h1>
-
-        <div id="posted-scripts">
-            {{#each scriptData as |script|}}
-                {{> scripts-card}}
-            {{/each}}
-        </div>
+{{!-- // Create a card for each posted script with its status --}}
+<div class="card mb-4" id="search-result" data-id={{id}}>
+    <div class="card-header">
+        <p class="card-header-title">
+            {{#if (eq status "purchased") }}
+            <span class="has-text-success">{{status}}: {{Assignee.firstName}} {{Assignee.lastName}}</span>
+            {{else}}
+            <span class="has-text-dark">{{status}}</span>
+            {{/if}}
+        </p>
     </div>
- </main>
+  <div class="card-content">
+    <div class="script-details mb-2">
+      <p class="title is-4">{{title}}</p>
+      <p class="subtitle is-6">{{description}}</p>
+    </div>
+    <div class="content">
+      <p>{{text}}</p>
+      {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
+    </div>
+  </div>
+</div>
+       
