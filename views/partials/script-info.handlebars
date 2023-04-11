@@ -1,0 +1,24 @@
+//Shows the full information for the script
+<main class="column">
+    <div id="full-script-info" class="pl-4">
+        
+            <h1
+            class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
+            id="script-title"
+            >
+            {{scriptData.title}}
+            </h1>
+
+            <section id="script-text">
+                {{scriptData.text}}     
+            </section>
+            <section>
+                `Written by: ${ {{scriptData.author.firstName}} {{scriptData.author.lastName}}.`
+            </section>
+            <footer>
+                <form>
+ <input type="button" value="Go back!" onclick="history.back()">
+</form>
+            </footer>
+    </div>
+</main>
