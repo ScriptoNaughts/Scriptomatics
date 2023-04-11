@@ -158,10 +158,13 @@ router.get("/scripts/writer", async (req, res) => {
   }
 });
 
-// GET request to render the scripts page where the agents can view their puchased scripts
+// GET request to render the scripts page where the agents can have a preview of all their puchased scripts
 router.get("/scripts/agent", async (req, res) => {
   try {
-    /* scriptData follows the following format:
+    // Query the database for script data
+
+    /*-------------------------
+          Script Data follows the following Format
 [
     {
         "id": 1,
@@ -205,11 +208,17 @@ router.get("/scripts/agent", async (req, res) => {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    const scriptData = dbScriptData.map((script) =>
-      script.get({ plain: true })
-    );
+    /*-------------------------
+      Limits the text of each script to the first 50 words as we are only presenting the previews
+    ---------------------------*/
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 50).join(" ") + "...";
+      return scriptText;
+    });
 
-    res.render("agent-scripts", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-purchased", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
