@@ -1,4 +1,5 @@
-<div class="card">
+// Create a card for each script
+<div class="card" data-id="{{id}}">
     <header class="card-header">
         <p class="card-header-title">{{title}}</p>
     </header>
@@ -8,8 +9,7 @@
         </div>
     </div>
     <footer class="card-footer">
-        //TODO: add route for the new handlebar with full script info
-        <a href="#" class="card-footer-item">View</a> 
+        <a href=`/api/scripts/${ {{id}} }` class="card-footer-item">View</a> 
     </footer>
 </div>
        
