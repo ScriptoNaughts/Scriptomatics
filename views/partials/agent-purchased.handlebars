@@ -1,10 +1,12 @@
-{{!-- // Create a card for each posted script--}}
+{{! // Create a card for each posted script}}
 <div class="card mb-4" id="search-result" data-id={{id}}>
-    <div class="card-header">
-        <p class="card-header-title">
-            <span class="has-text-success">Writer: {{Writer.firstName}} {{Writer.lastName}}</span>
-        </p>
-    </div>
+  <div class="card-header">
+    <p class="card-header-title">
+      <span class="has-text-success">Writer:
+        {{Writer.firstName}}
+        {{Writer.lastName}}</span>
+    </p>
+  </div>
   <div class="card-content">
     <div class="script-details mb-2">
       <p class="title is-4">{{title}}</p>
@@ -15,5 +17,7 @@
       {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
     </div>
   </div>
+  <footer class="card-footer">
+    <a href="/api/scripts/view/{{id}}" class="card-footer-item">View</a>
+  </footer>
 </div>
-       

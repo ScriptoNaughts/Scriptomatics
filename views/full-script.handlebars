@@ -22,6 +22,14 @@
         <p class="is-size-6 is-size-7-mobile">
           {{scriptData.Writer.firstName}} {{scriptData.Writer.lastName}}
         </p>
+        {{#if (eq scriptData.status "purchased")}}
+        <p class="is-size-6 is-size-7-mobile has-text-weight-medium mb-1">
+          Purchased by:
+        </p>
+        <p class="is-size-6 is-size-7-mobile">
+          {{scriptData.Assignee.firstName}} {{scriptData.Assignee.lastName}}
+        </p>
+        {{/if}}
       </div>
       <footer class="mt-5">
         <button class="button is-info is-light" onclick="history.back()">
