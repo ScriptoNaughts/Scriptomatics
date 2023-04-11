@@ -1,28 +1,8 @@
 const router = require("express").Router();
 const { TBLUser, TBLScript } = require("../../models");
 
-// GET all scripts and their associated Writer and Assigned Agent
-router.get("/", async (req, res) => {
-  try {
-    const scriptData = await TBLScript.findAll({
-      include: [
-        { model: TBLUser, as: "Writer" },
-        { model: TBLUser, as: "Assignee" },
-      ],
-    });
-
-    if (!scriptData) {
-      res.status(404).json();
-      return;
-    }
-    res.status(200).json(scriptData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
 // GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for viewing by the writers and agents.
-router.get("/info/:id", async (req, res) => {
+router.get("/view/:id", async (req, res) => {
   try {
     const dbScriptData = await TBLScript.findByPk(req.params.id, {
       include: [
