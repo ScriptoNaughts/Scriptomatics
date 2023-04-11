@@ -1,4 +1,4 @@
-// Create a card for each script
+{{!-- // Create a card for each script --}}
 <div class="card" data-id="{{id}}">
     <header class="card-header">
         <p class="card-header-title">{{title}}</p>
@@ -9,7 +9,7 @@
         </div>
     </div>
     <footer class="card-footer">
-        <a href=`/api/scripts/${ {{id}} }` class="card-footer-item">View</a> 
+        <a href="/api/scripts/info/{{id}}" class="card-footer-item">View</a> 
     </footer>
 </div>
        
