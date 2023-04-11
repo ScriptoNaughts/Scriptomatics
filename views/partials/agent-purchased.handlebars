@@ -1,16 +1,19 @@
-<main class="column">
-    <div id="purchased" class="pl-4">
-        <h1
-        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
-        id="purchased-title"
-        >
-        Purchased Scripts
-        </h1>
-
-        <div id="purchased-scripts">
-        {{#each scriptData as |script|}}
-            {{> scripts-card}}
-        {{/each}}
-        </div>
+{{!-- // Create a card for each posted script--}}
+<div class="card mb-4" id="search-result" data-id={{id}}>
+    <div class="card-header">
+        <p class="card-header-title">
+            <span class="has-text-success">Writer: {{Writer.firstName}} {{Writer.lastName}}</span>
+        </p>
     </div>
-</main>
+  <div class="card-content">
+    <div class="script-details mb-2">
+      <p class="title is-4">{{title}}</p>
+      <p class="subtitle is-6">{{description}}</p>
+    </div>
+    <div class="content">
+      <p>{{text}}</p>
+      {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
+    </div>
+  </div>
+</div>
+       
