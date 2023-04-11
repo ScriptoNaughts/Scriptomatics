@@ -1,5 +1,11 @@
+{{> loggedin-nav}}
+
 <div class="columns is-mobile" id="main">
+  {{#if (eq userRole "writer")}}
   {{> writer-menu}}
+  {{else}}
+  {{> agent-menu}}
+  {{/if}}
 
   <main class="column">
     <a href="#" onclick="history.back()">
