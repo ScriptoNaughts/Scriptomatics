@@ -21,8 +21,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET a specified script and it's associated Writer and Assigned Agent
-router.get("/:id", async (req, res) => {
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for viewing by the writers and agents.
+router.get("/info/:id", async (req, res) => {
   try {
     const scriptData = await TBLScript.findByPk(req.params.id, {
       include: [
@@ -36,6 +36,26 @@ router.get("/:id", async (req, res) => {
       return;
     }
     res.render("full-script", { scriptData, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for editing by the writers.
+router.get("/edit/:id", async (req, res) => {
+  try {
+    const scriptData = await TBLScript.findByPk(req.params.id, {
+      include: [
+        { model: TBLUser, as: "Writer" },
+        { model: TBLUser, as: "Assignee" },
+      ],
+    });
+
+    if (!scriptData) {
+      res.status(404).json();
+      return;
+    }
+    res.render("draft-edit-script", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }

@@ -14,7 +14,7 @@
         {{/each}}
       </div>
       <div class="column" id="view-script">
-        <form>
+        <div>
           <div class="field">
             <div class="control pb-1">
               <input
@@ -22,6 +22,7 @@
                 type="text"
                 placeholder="Script title"
                 id="title"
+                value={{title}}
               />
             </div>
             <div class="control pb-1">
@@ -30,6 +31,7 @@
                 type="text"
                 placeholder="Script description"
                 id="description"
+                value={{description}}
               />
             </div>
             <div class="control">
@@ -37,14 +39,14 @@
                 class="textarea is-large"
                 placeholder="Script text"
                 id="text"
-              ></textarea>
+              >{{text}}</textarea>
             </div>
           </div>
           <div class="fa-solid fa-plus fa-lg" id="create-button"></div>
-          {{!-- <div class="fa-solid fa-floppy-disk fa-lg" id="save-button" data-id={{scriptData.id}}></div> --}}
-        </form>
+          <div class="fa-solid fa-floppy-disk fa-lg" id="save-button" data-id={{id}}></div>
+        </div>
       </div>
     </div>
   </div>
 </main>
-{{!-- <script type="application/x-javascript" src="js/workspace.js"></script> --}}
+<script type="application/x-javascript" src="js/workspace.js"></script>
