@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 <a name="readme-top"></a>
 <div align="center">
 <a href="https://github.com/ScriptoNaughts/Scriptomatics/tree/main">
@@ -63,10 +65,52 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 <!-- GETTING STARTED -->
 ## Getting Started
 <!--Add deployed site link -->
-[Deployed Website]( )
+[Deployed Website](https://shrouded-garden-51163.herokuapp.com/)
+
+<a name="readme-top"></a>
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+As a scriptwriter, the application usage is as followed:
+
+> View posted scripts:
+![image](https://user-images.githubusercontent.com/112664790/231582586-e50f6f54-9897-4546-801c-9893ad6eb72a.png)
+
+> Writer workspace:
+![image](https://user-images.githubusercontent.com/112664790/231582361-bc186550-247a-4b50-b8aa-33ba458a15ec.png)
+
+>Easily edit, publish or simply save you projects:
+![image](https://user-images.githubusercontent.com/112664790/231582996-72340d16-cbe8-4438-9835-84d41cc4b39f.png)
+
+>Video demonstation of writer platform:
+
+https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
+
+<a name="readme-top"></a>
+
+
+
+---
+
+As an agent, the application usage is as followed:
+
+>Browse posted scripts, specify search by utilizing the "Search by" feature to narrow down script need:
+![image](https://user-images.githubusercontent.com/112664790/231583862-03682a12-2cf4-4116-848d-f587e2a01161.png)
+
+>Easily purchase scripts or message the writer for further details:
+![image](https://user-images.githubusercontent.com/112664790/231584295-d04f0386-d2a6-4bc7-8936-bfbe52a54bdb.png)
+
+> View purchased scripts:
+![image](https://user-images.githubusercontent.com/112664790/231584601-e3a04799-b9db-4919-96f5-ab287e4ec028.png)
+
+>Video demonstation of agent platform:
+
+
+https://user-images.githubusercontent.com/112664790/231575319-fc95de71-da90-4192-9f9a-f4056666c630.mp4
+
+
 
 
 <!-- ROADMAP -->
@@ -116,8 +160,8 @@ Ayad Patel
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
+Distributed under the MIT License. </br>
+To see the license permissions for commercial and non-commercial use, modification, and distribution of the software, please see the full text of the license, available at https://opensource.org/licenses/MIT.
 <!-- CONTACT -->
 ## Contact
 
@@ -158,3 +202,6 @@ Ayad Patel
 * [Sequelize](https://sequelize.org/)
 * [Sqlite3](https://www.npmjs.com/package/sqlite3)
 * [stackoveroverflow](https://stackoverflow.com/)
+
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
