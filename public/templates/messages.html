@@ -1,0 +1,40 @@
+<main class="column">
+  <div id="massages">
+    <h1
+      class="title is-2 is-4-mobile has-text-weight-bold pb-5 pl-5"
+      id="purchased-title"
+    >
+      Messages
+    </h1>
+    <div class="columns">
+      <div class="column is-one-quarter" id="draft-scripts">
+        {{#each userData as |user|}} {{> message-card}} {{/each}}
+      </div>
+      <div class="column mr-4" id="view-script">
+        <form>
+          <div class="field">
+            <div class="control">
+              <textarea
+                class="textarea is-large"
+                placeholder="View Messages Here"
+                id="script-text"
+              ></textarea>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input
+                class="input"
+                type="text"
+                placeholder="Type your message..."
+              />
+            </div>
+            <div class="control">
+              <a class="button is-info"> Submit </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
