@@ -85,6 +85,7 @@ As a scriptwriter, the application usage is as followed:
 ![image](https://user-images.githubusercontent.com/112664790/231582996-72340d16-cbe8-4438-9835-84d41cc4b39f.png)
 
 >Video demonstation of writer platform:
+
 https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
 
 <a name="readme-top"></a>
@@ -105,6 +106,8 @@ As an agent, the application usage is as followed:
 ![image](https://user-images.githubusercontent.com/112664790/231584601-e3a04799-b9db-4919-96f5-ab287e4ec028.png)
 
 >Video demonstation of agent platform:
+
+
 https://user-images.githubusercontent.com/112664790/231575319-fc95de71-da90-4192-9f9a-f4056666c630.mp4
 
 
