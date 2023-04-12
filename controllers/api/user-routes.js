@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
     req.session.save(() => {
       req.session.loggedIn = true;
       req.session.userID = userData.id;
+      req.session.userRole = req.body.roleTitle;
 
       // redirect to homepage after saving session
       res.redirect("/loggedin");
@@ -115,17 +116,26 @@ router.post("/login", async (req, res, next) => {
       return;
     }
 
+    // Find the role of the user requesting to log in (if they are a writer or an agent)
+    const role = await TBLRole.findOne({
+      where: { id: userData.roleID },
+    });
+
     // Regenerate the session to prevent session fixation
     req.session.regenerate(function (err) {
       if (err) next(err);
 
       // Once the user is authenticated, set up the session with a loggedIn variable showing the status that the
-      // user is successfully logged in, and a userID keeping track of the id of the logged in user
+      // user is successfully logged in, a userID keeping track of the id of the logged in user, and a userRole
+      // to keep track of the user's title
       req.session.loggedIn = true;
       req.session.userID = userData.id;
+      req.session.userRole = role.roleTitle;
 
       console.log(
-        "\n\nLog in Session in user-routes\n\n" + JSON.stringify(req.session) + "\n\n\n"
+        "\n\nLog in Session in user-routes\n\n" +
+          JSON.stringify(req.session) +
+          "\n\n\n"
       ); // Output the session data to the console
 
       // save the session before redirection to ensure page load does not happen before session is saved

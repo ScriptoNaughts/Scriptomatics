@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
 class TBLScript extends Model {}
 
@@ -23,24 +23,24 @@ TBLScript.init(
       references: {
         model: "TBLUser",
         key: "id",
-      }
+      },
     },
     title: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notEmpty: true,
       },
     },
     text: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notEmpty: true,
@@ -57,22 +57,22 @@ TBLScript.init(
       },
     },
     assignedTo: {
-        type: DataTypes.INTEGER,
-        defaultValue: null,
-        validate:{
-          notEmpty: true,
-        },
-        references: {
-            model: "TBLUser",
-            key: "id",
-        }
+      type: DataTypes.INTEGER,
+      defaultValue: null,
+      validate: {
+        notEmpty: true,
+      },
+      references: {
+        model: "TBLUser",
+        key: "id",
+      },
     },
   },
   {
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'TBLScript',
+    modelName: "TBLScript",
   }
 );
 

@@ -1,52 +1,13 @@
-<main>
-      <div id="workspace">
-        <h1
-          class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5 pl-5"
-          id="purchased-title"
-        >
-          Workspace
-        </h1>
-        <div class="pl-5 pr-5 columns">
-          <div class="column">
-            <button class="button is-normal is-responsive" id="create-button">
-              Create new script
-            </button>
-          </div>
+<div class="card draft-script mb-3">
+    <header class="card-header">
+        <p class="card-header-title">{{title}}</p>
+    </header>
+    <div class="card-content">
+        <div class="content">
+            {{description}}
         </div>
-        <div class="pl-5 pr-5 columns">
-          <div class="column is-one-third" id="draft-scripts">
-            <div class="card" id="purchased-script">
-              <div class="card-content">
-                <div class="content">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec iaculis mauris.
-                  <a href="#">@bulmaio</a>. <a href="#">#css</a>
-                  <a href="#">#responsive</a>
-                  <br />
-                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column" id="view-script">
-            <form>
-              <div class="field">
-                <div class="control pb-1">
-                  <input
-                    class="input is-large"
-                    type="text"
-                    placeholder="Script title"
-                  />
-                </div>
-                <div class="control">
-                  <textarea
-                    class="textarea is-large"
-                    placeholder="Script text"
-                  ></textarea>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </main>
+    </div>
+    <footer class="card-footer">
+        <button class="card-footer-item button is-link edit-button" data-id={{id}}>Edit</button>
+    </footer>
+</div>

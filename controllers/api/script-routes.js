@@ -1,40 +1,47 @@
 const router = require("express").Router();
 const { TBLUser, TBLScript } = require("../../models");
 
-// GET all scripts and their associated Writer and Assigned Agent
-router.get("/", async (req, res) => {
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for viewing by the writers and agents.
+router.get("/view/:id", async (req, res) => {
   try {
-    const scriptData = await TBLScript.findAll({
+    const dbScriptData = await TBLScript.findByPk(req.params.id, {
       include: [
         { model: TBLUser, as: "Writer" },
         { model: TBLUser, as: "Assignee" },
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       res.status(404).json();
       return;
     }
-    res.status(200).json(scriptData);
+
+    // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
+    const scriptData = dbScriptData.get({ plain: true });
+
+    res.render("full-script", { scriptData, userRole: req.session.userRole });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// GET a specified script and it's associated Writer and Assigned Agent
-router.get("/:id", async (req, res) => {
+// GET a specified script and it's associated Writer and Assigned Agent. This script is to be used for editing by the writers.
+router.get("/edit/:id", async (req, res) => {
   try {
-    const scriptData = await TBLScript.findByPk(req.params.id, {
+    const dbScriptData = await TBLScript.findByPk(req.params.id, {
       include: [
         { model: TBLUser, as: "Writer" },
         { model: TBLUser, as: "Assignee" },
       ],
     });
 
-    if (!scriptData) {
+    if (!dbScriptData) {
       res.status(404).json();
       return;
     }
+
+    const scriptData = dbScriptData.get({ plain: true });
+
     res.status(200).json(scriptData);
   } catch (err) {
     res.status(500).json(err);
@@ -46,55 +53,56 @@ router.get("/writer/:name", async (req, res) => {
   try {
     // Get the search term from the URL parameter and remove any whitespace
     const searchName = req.params.name.replace(/\s/g, "").toLowerCase();
-
     // Find the role with the title "writer" in the TBLRole table
-    const role = await TBLRole.findOne({
-      where: { roleTitle: "writer" },
-    });
-
+    // const role = await TBLRole.findOne({
+    //   where: { roleTitle: "writer" },
+    // });
     // Find all users who have a "writer" role
-    const writerData = await TBLUser.findAll({
-      where: { roleID: role.id },
+    const dbWriterData = await TBLUser.findAll({
+      where: { roleID: 1 },
     });
-
-    if (!writerData) {
+    if (!dbWriterData) {
       res.status(404).json({ message: "No writers found" });
       return;
     }
-
+    const writerData = dbWriterData.map((writer) =>
+      writer.get({ plain: true })
+    );
+    console.log("\n\nWriterData:" + JSON.stringify(writerData) + "\n\n");
     // This array will store all the script records for the specified writer(s)
     const scriptsData = [];
-
     // Loop through all the writers
     for (const writer of writerData) {
       // Combine the first and last names of the writer's record into one string, removing any whitespace
       const writerName = (writer.firstName + writer.lastName)
         .replace(/\s/g, "")
         .toLowerCase();
-
       // Check if the clinet's search term is included in the combined first and last name of the writer's record
       if (writerName.includes(searchName)) {
         // If the search term is included, find all the script records written by that writer
-        const writerScripts = await TBLScript.findAll({
-          where: { writerID: writer.id },
+        const dbWriterScripts = await TBLScript.findAll({
+          where: {
+            writerID: writer.id,
+            status: "published",
+          },
           include: [
             { model: TBLUser, as: "Writer" },
             { model: TBLUser, as: "Assignee" },
           ],
         });
-
+        const writerScripts = dbWriterScripts.map((script) =>
+          script.get({ plain: true })
+        );
         // Add all the writer's scripts to the array
         scriptsData.push(...writerScripts);
       }
     }
-
     if (!scriptsData || scriptsData.length === 0) {
       res
         .status(404)
         .json({ message: "No scripts found for selected writer(s)" });
       return;
     }
-
     res.status(200).json(scriptsData);
   } catch (err) {
     res.status(500).json(err);

@@ -56,12 +56,6 @@ router.get("/loggedin", async (req, res) => {
     // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
     userData = userData.get({ plain: true });
 
-    console.log(
-      "\n\nData being sent to handlebars:\n" +
-        JSON.stringify(userData, null, 4) +
-        "\n\n"
-    );
-
     // Access the userData's TBLRole roleTitle to display the appropriate homepage for writers and agents
 
     res.render("loggedin", { userData, loggedIn: req.session.loggedIn });
@@ -71,10 +65,13 @@ router.get("/loggedin", async (req, res) => {
   }
 });
 
-// GET request to render the scripts page where the writers can view their posted scripts
+// GET request to render the scripts page where the writers can have a preview of all their posted scripts (purchased & published)
 router.get("/scripts/writer", async (req, res) => {
   try {
-    /* scriptData follows the following 2 format:
+    // Query the database for script data
+
+    /*-------------------------
+          Script Data follows these 2 Format
 
     --- purchased script ---
 [
@@ -114,7 +111,8 @@ router.get("/scripts/writer", async (req, res) => {
         "updatedAt": "2023-04-06T23:45:55.000Z",
         "Assignee": null
     }
-]*/
+]
+    ---------------------------*/
 
     // Finds all the scripts the requesting writer (user) published (purchased and non-purchased)
     let dbScriptData = await TBLScript.findAll({
@@ -133,17 +131,25 @@ router.get("/scripts/writer", async (req, res) => {
           attributes: { exclude: ["password"] }, // exclude's the agents password as that is sensitive information
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    const scriptData = dbScriptData.map((script) =>
-      script.get({ plain: true })
-    );
+    /*-------------------------
+      Limits the text of each script to the first 50 words as we are only presenting the previews
+    ---------------------------*/
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 50).join(" ") + "...";
+      return scriptText;
+    });
 
-    res.render("writer-scripts", {
+    // Render the writer-posted page with the script previews
+    res.render("writer-posted", {
       scriptData,
       loggedIn: req.session.loggedIn,
     });
@@ -153,10 +159,13 @@ router.get("/scripts/writer", async (req, res) => {
   }
 });
 
-// GET request to render the scripts page where the agents can view their puchased scripts
+// GET request to render the scripts page where the agents can have a preview of all their puchased scripts
 router.get("/scripts/agent", async (req, res) => {
   try {
-    /* scriptData follows the following format:
+    // Query the database for script data
+
+    /*-------------------------
+          Script Data follows the following Format
 [
     {
         "id": 1,
@@ -194,17 +203,27 @@ router.get("/scripts/agent", async (req, res) => {
           attributes: { exclude: ["password"] }, // exclude's the writers password as that is sensitive information
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    const scriptData = dbScriptData.map((script) =>
-      script.get({ plain: true })
-    );
+    /*-------------------------
+      Limits the text of each script to the first 50 words as we are only presenting the previews
+    ---------------------------*/
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 50).join(" ") + "...";
+      return scriptText;
+    });
 
-    res.render("agent-scripts", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-purchased", {
+      scriptData,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -253,15 +272,23 @@ router.get("/browse", async (req, res) => {
           attributes: { exclude: ["password"] },
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    const scriptData = dbScriptData.map((script) =>
-      script.get({ plain: true })
-    );
+    /*-------------------------
+      Limits the text of each script to the first 100 words as agents who have not purchased the script should not have full access yet
+    ---------------------------*/
+
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 100).join(" ") + "...";
+      return scriptText;
+    });
 
     res.render("agent-browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {
@@ -294,6 +321,7 @@ router.get("/workspace", async (req, res) => {
         writerID: req.session.userID,
         status: "draft",
       },
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
@@ -384,7 +412,7 @@ router.get("/messages", async (req, res) => {
       }
     });
 
-    res.render("messages", { usersData, loggedIn: req.session.loggedIn });
+    res.render("messages", { usersData, userRole: req.session.userRole });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

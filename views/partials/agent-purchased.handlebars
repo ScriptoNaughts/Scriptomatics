@@ -1,29 +1,23 @@
-<main class="column">
-    <div id="purchased" class="pl-4">
-        <h1
-        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
-        id="purchased-title"
-        >
-        Purchased Scripts
-        </h1>
-
-        <div id="purchased-scripts">
-        <div class="card" id="purchased-script">
-            <div class="card-content">
-            <div class="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-                <a href="#">@bulmaio</a>. <a href="#">#css</a>
-                <a href="#">#responsive</a>
-                <br />
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>
-            </div>
-            <footer class="card-footer">
-            <a href="#" class="card-footer-item">View</a>
-            </footer>
-        </div>
-        <br />
-        </div>
+{{! // Create a card for each posted script}}
+<div class="card mb-4 search-result" data-id={{id}}>
+  <div class="card-header">
+    <p class="card-header-title">
+      <span class="has-text-success">Writer:
+        {{Writer.firstName}}
+        {{Writer.lastName}}</span>
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="script-details mb-2">
+      <p class="title is-4">{{title}}</p>
+      <p class="subtitle is-6">{{description}}</p>
     </div>
-</main>
+    <div class="content">
+      <p>{{text}}</p>
+      {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="/api/scripts/view/{{id}}" class="card-footer-item">View</a>
+  </footer>
+</div>

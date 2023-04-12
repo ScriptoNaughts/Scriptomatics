@@ -1,0 +1,44 @@
+[
+    {
+      "firstName": "Graham",
+      "lastName": "Graham",
+      "roleID": 1,
+      "password": "123456789",
+      "emailAddress": "graham@scriptomatics.com"
+    },
+    {
+        "firstName": "Luba",
+        "lastName": "Luba",
+        "roleID": 1,
+        "password": "123456789",
+        "emailAddress": "luba@scriptomatics.com"
+    },
+    {
+        "firstName": "Rajvir",
+        "lastName": "Rajvir",
+        "roleID": 1,
+        "password": "123456789",
+        "emailAddress": "rajvir@scriptomatics.com"
+    },
+    {
+        "firstName": "Abed",
+        "lastName": "Abed",
+        "roleID": 2,
+        "password": "123456789",
+        "emailAddress": "abed@scriptomatics.com"
+    },
+    {
+        "firstName": "Onelle",
+        "lastName": "Onelle",
+        "roleID": 2,
+        "password": "123456789",
+        "emailAddress": "onelle@scriptomatics.com"
+    },
+    {
+        "firstName": "Ayad",
+        "lastName": "Ayad",
+        "roleID": 2,
+        "password": "123456789",
+        "emailAddress": "ayad@scriptomatics.com"
+    }
+]

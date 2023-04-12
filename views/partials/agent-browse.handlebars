@@ -1,51 +1,24 @@
-<main class="column">
-    <div id="browse" class="pl-4">
-        <h1 class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5" id="browse-title">Browse</h1>
-        <form id="search-script">
-            <div class="field is-grouped">
-                <p class="control is-expanded">
-                <input class="input" type="text" placeholder="Find a script" />
-                </p>
-                <p class="control">
-                <a class="button is-info"> Search </a>
-                </p>
-            </div>
-
-            <div class="field is-grouped">
-                <label class="label">Search by:&nbsp;</label>
-                <div class="control is-expended">
-                <label class="radio">
-                    <input type="radio" name="answer" id="genre" checked />
-                    Genre
-                </label>
-                </div>
-                <div class="control">
-                <label class="radio">
-                    <input type="radio" name="answer" id="keyword" />
-                    Keyword
-                </label>
-                </div>
-                <div class="control">
-                <label class="radio">
-                    <input type="radio" name="answer" id="author" />
-                    Author
-                </label>
-                </div>
-            </div>
-        </form>
-        <div id="search-results">
-            <div class="card" id="search-result">
-                <div class="card-content">
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Phasellus nec iaculis mauris.
-                        <a href="#">@bulmaio</a>. <a href="#">#css</a>
-                        <a href="#">#responsive</a>
-                        <br />
-                        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{! // Create a card for each posted script}}
+<div class="card mb-6 search-result">
+  <div class="card-header">
+    <p class="card-header-title">
+      <span class="has-text-dark">Writer:
+        {{Writer.firstName}}
+        {{Writer.lastName}}</span>
+    </p>
+  </div>
+  <div class="card-content">
+    <div class="script-details mb-2">
+      <p class="title is-4">{{title}}</p>
+      <p class="subtitle is-6">{{description}}</p>
     </div>
-</main>
+    <div class="content">
+      <p>{{text}}</p>
+      {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a href="" class="card-footer-item message-writer" data-writerId={{Writer.id}}>Message Writer</a>
+    <a href="" class="card-footer-item purchase-script" data-scriptId={{id}}>Purchase Script</a>
+  </footer>
+</div>

@@ -1,5 +1,55 @@
 {{> loggedin-nav}}
 
 <div class="columns is-mobile" id="main">
-    {{> writer-workspace}}
-</div> 
+  {{> writer-menu}}
+
+  <main class="column">
+    <div id="workspace">
+      <h1 class="title is-2 is-4-mobile has-text-weight-bold pb-5 pl-5" id="purchased-title">
+        Workspace
+      </h1>
+
+      <div class="columns">
+        <div class="column is-one-quarter" id="draft-scripts">
+          {{#each scriptData as |script|}}
+          {{> writer-workspace}}
+          {{/each}}
+        </div>
+        <div class="column mr-4" id="view-script">
+          <form>
+            <div class="field">
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="Script title" id="script-title" required/>
+              </div>
+              <div class="control">
+                <input class="input is-large" type="text" placeholder="Script description" id="script-description" required/>
+              </div>
+              <div class="control">
+                <textarea class="textarea is-large" placeholder="Script text" id="script-text" required></textarea>
+              </div>
+            </div>
+            <div class="field is-grouped is-grouped-right">
+              <div class="control">
+                <button class="button is-success is-large has-text-light" id="publish-button"> 
+                Publish
+                </button>
+              </div>
+              <div class="control">
+                <button class="button is-link is-large has-text-light" id="save-button">
+                  Save<i class="fa fa-floppy-o ml-2"></i>
+                </button>
+              </div>
+              <div class="control">
+                <button class="button has-background-grey is-large has-text-light" id="new-button">
+                  New<i class="fa fa-plus ml-2"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="application/x-javascript" src="js/workspace.js"></script>
+</div>

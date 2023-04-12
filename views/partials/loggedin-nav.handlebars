@@ -1,43 +1,37 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-    <a href="/">
-        <img src="../../../assets/logo.png" width="80" id="logo-img" />
-    </a>
+        <a href="/">
+            <img src="../../../assets/logo.png" width="80" id="logo-img" />
+        </a>
 
-    <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navMenu"
-    >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-    </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
     </div>
 
     <div class="navbar-menu" id="navMenu">
-    <div class="navbar-end">
-        <div class="navbar-item">
-        <button class="home-button">
-            <span class="icon is-small">
-            <a class="fa fa-home fa-2x" href="/"></a>
-            </span>
-        </button>
-        <button class="notif-button">
-            <span class="icon is-small">
-            <a class="fa fa-bell fa-lg"></a>
-            </span>
-        </button>
-        <form method="POST" action="/api/users/logout">
-            <button class="log-off-button" >
-                <span class="icon is-small">
-                <a class="fa fa-sign-out fa-2x"></a>
-                </span>
-            </button>
-        </form>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <button class="home-button">
+                    <span class="icon is-small">
+                        <a class="fa fa-home fa-2x" href="/"></a>
+                    </span>
+                </button>
+                <button class="notif-button">
+                    <span class="icon is-small">
+                        <a class="fa fa-bell fa-lg"></a>
+                    </span>
+                </button>
+                <form method="POST" action="/api/users/logout">
+                    <button class="log-off-button">
+                        <span class="icon is-small">
+                            <a class="fa fa-sign-out fa-2x"></a>
+                        </span>
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
 </nav>
