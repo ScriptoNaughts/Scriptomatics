@@ -2,12 +2,12 @@
 
 <div class="columns is-mobile" id="main">
     {{#if (eq userData.TBLRole.roleTitle "writer")}}
-        {{> writer-menu}}
+    {{> writer-menu}}
 
-        {{> writer-home}}
+    {{> writer-home}}
     {{else}}
-        {{> agent-menu}}
+    {{> agent-menu}}
 
-        {{> agent-home}}
+    {{> agent-home}}
     {{/if}}
 </div>

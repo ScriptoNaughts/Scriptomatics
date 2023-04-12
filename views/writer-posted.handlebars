@@ -4,19 +4,16 @@
     {{> writer-menu}}
 
     <main class="column">
-    <div id="posted" class="pl-4">
-        <h1
-        class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5"
-        id="posted-title"
-        >
-        Posted Scripts
-        </h1>
+        <div id="posted" class="pl-4">
+            <h1 class="is-size-2 is-size-4-mobile has-text-weight-bold pb-5" id="posted-title">
+                Posted Scripts
+            </h1>
 
-        <div id="posted-scripts">
-            {{#each scriptData as |script|}}
+            <div id="posted-scripts">
+                {{#each scriptData as |script|}}
                 {{> writer-posted}}
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
-    </div>
- </main>
-</div> 
+    </main>
+</div>

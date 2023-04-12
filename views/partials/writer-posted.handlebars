@@ -1,14 +1,14 @@
 {{!-- // Create a card for each posted script with its status --}}
 <div class="card mb-4 search-result" data-id={{id}}>
-    <div class="card-header">
-        <p class="card-header-title">
-            {{#if (eq status "purchased") }}
-            <span class="has-text-success">{{status}}: {{Assignee.firstName}} {{Assignee.lastName}}</span>
-            {{else}}
-            <span class="has-text-dark">{{status}}</span>
-            {{/if}}
-        </p>
-    </div>
+  <div class="card-header">
+    <p class="card-header-title">
+      {{#if (eq status "purchased") }}
+      <span class="has-text-success">{{status}}: {{Assignee.firstName}} {{Assignee.lastName}}</span>
+      {{else}}
+      <span class="has-text-dark">{{status}}</span>
+      {{/if}}
+    </p>
+  </div>
   <div class="card-content">
     <div class="script-details mb-2">
       <p class="title is-4">{{title}}</p>
@@ -23,4 +23,3 @@
     <a href="/api/scripts/view/{{id}}" class="card-footer-item">View</a>
   </footer>
 </div>
-       

@@ -12,7 +12,7 @@
                         <input class="input search-bar" type="text" placeholder="Find a script" />
                     </p>
                     <p class="control">
-                    <a class="button is-info search-button"> Search </a>
+                        <a class="button is-info search-button"> Search </a>
                     </p>
                 </div>
 
@@ -20,8 +20,8 @@
                     <label class="label">Search by:&nbsp;</label>
                     <div class="control is-expended">
                         <label class="radio">
-                        <input type="radio" name="answer" id="genre" />
-                        Genre
+                            <input type="radio" name="answer" id="genre" />
+                            Genre
                         </label>
                     </div>
                     <div class="control">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="control">
                         <label class="radio">
-                            <input type="radio" name="answer" id="author" checked/>
+                            <input type="radio" name="answer" id="author" checked />
                             Author
                         </label>
                     </div>
@@ -41,9 +41,9 @@
         </div>
         <div id="search-results">
             {{#each scriptData as |script|}}
-                {{> agent-browse}}
+            {{> agent-browse}}
             {{/each}}
         </div>
     </main>
-</div> 
+</div>
 <script type="application/x-javascript" src="js/agent-browse.js"></script>

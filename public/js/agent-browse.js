@@ -95,12 +95,6 @@ purchaseScriptHandler = async (event) => {
       purchaseButton.classList.remove("purchase-script");
       purchaseButton.removeEventListener("click", purchaseScriptHandler);
 
-      console.log(purchaseButton);
-      console.log(purchaseButton.closest(".card-footer"));
-      console.log(purchaseButton
-        .closest(".card-footer")
-        .closest(".search-result"))
-
       // Update the text of the writer's name in the header (nice visual representation to let the user know their purchase is successful)
       const searchResultDiv = purchaseButton
         .closest(".card-footer")
