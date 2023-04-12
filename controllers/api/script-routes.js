@@ -18,7 +18,7 @@ router.get("/view/:id", async (req, res) => {
 
     // Convert the Sequelize model instances to plain JavaScript objects for easier manipulation using Javascript methods
     const scriptData = dbScriptData.get({ plain: true });
-    
+
     res.render("full-script", { scriptData, userRole: req.session.userRole });
   } catch (err) {
     res.status(500).json(err);
@@ -65,7 +65,6 @@ router.get("/writer/:name", async (req, res) => {
       res.status(404).json({ message: "No writers found" });
       return;
     }
-    console.log("\n\ndb writer data:" + JSON.stringify(dbWriterData) + "\n\n");
     const writerData = dbWriterData.map((writer) =>
       writer.get({ plain: true })
     );
@@ -104,9 +103,6 @@ router.get("/writer/:name", async (req, res) => {
         .json({ message: "No scripts found for selected writer(s)" });
       return;
     }
-    console.log(
-      "\n\nScriptsData:" + JSON.stringify(scriptsData, null, 4) + "\n\n"
-    );
     res.status(200).json(scriptsData);
   } catch (err) {
     res.status(500).json(err);
