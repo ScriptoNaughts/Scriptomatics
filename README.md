@@ -89,7 +89,10 @@ Graham Synnott
 > Tasks and roles
 ---
 Luba Mintsys
-> Tasks and roles
+> HTML template for writer workspace page, agent homepage, write homepage, agent browse page, agent purchased scripts page, writer's posted scripts page
+server set up - 
+agent handlebars navigation
+connected the controller routes to the handlebar.
 ---
 Onelle Fullente
 > Tasks and roles
