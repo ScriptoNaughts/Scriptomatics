@@ -67,6 +67,9 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 <!--Add deployed site link -->
 [Deployed Website](https://shrouded-garden-51163.herokuapp.com/)
 
+<a name="readme-top"></a>
+
+
 <!-- USAGE EXAMPLES -->
 ## Usage
 
@@ -83,6 +86,9 @@ As a scriptwriter, the application usage is as followed:
 
 >Video demonstation of writer platform:
 https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
+
+<a name="readme-top"></a>
+
 
 
 ---
