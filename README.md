@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 <a name="readme-top"></a>
 <div align="center">
 <a href="https://github.com/ScriptoNaughts/Scriptomatics/tree/main">
@@ -131,8 +133,8 @@ Ayad Patel
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
+Distributed under the MIT License. </br>
+To see the license permissions for commercial and non-commercial use, modification, and distribution of the software, please see the full text of the license, available at https://opensource.org/licenses/MIT.
 <!-- CONTACT -->
 ## Contact
 
