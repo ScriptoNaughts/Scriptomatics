@@ -1,10 +1,8 @@
 const sequelize = require("../config/connection");
-const { TBLRole } = require("../models");
-const { TBLScript } = require("../models");
+const { TBLRole , TBLScript , TBLUser } = require("../models");
 
-// const userData = require('./userData.json');
+const userData = require('./userData.json');
 const roleData = require("./roleSeedData.json");
-
 const scriptData = require("./scriptSeedData.json");
 
 const seedDatabase = async () => {
@@ -20,10 +18,10 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  // await User.bulkCreate(userData, {
-  //   individualHooks: true,
-  //   returning: true,
-  // });
+  await TBLUser.bulkCreate(userData, {
+    individualHooks: true,
+    returning: true,
+  });
 
   process.exit(0);
 };
