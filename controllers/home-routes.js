@@ -408,7 +408,7 @@ router.get("/messages", async (req, res) => {
       }
     });
 
-    res.render("messages", { usersData, loggedIn: req.session.loggedIn });
+    res.render("messages", { usersData, userRole: req.session.userRole });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
