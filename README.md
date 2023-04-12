@@ -48,7 +48,16 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 * HTML
 * CSS
 * javaScript
-* [Bulma](https://bulma.io/documentation/elements/title/)
+* [Bulma](https://bulma.io/)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt)
+* [Connect-session-sequalize](https://www.npmjs.com/package/connect-session-sequelize)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Express](https://expressjs.com/)
+* [Express-handlebars](https://www.npmjs.com/package/express-handlebars)
+* [Express-session](https://www.npmjs.com/package/express-session)
+* [Mysql2](https://www.npmjs.com/package/mysql2)
+* [Sequelize](https://sequelize.org/)
+* [Sqlite3](https://www.npmjs.com/package/sqlite3)
 
 <!-- GETTING STARTED -->
 ## Getting Started
