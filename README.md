@@ -81,26 +81,24 @@ As a scriptwriter, the application usage is as followed:
 >Easily edit, publish or simply save you projects:
 ![image](https://user-images.githubusercontent.com/112664790/231582996-72340d16-cbe8-4438-9835-84d41cc4b39f.png)
 
-
-
-
+>Video demonstation of writer platform:
 https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
 
 
 ---
 
-User: Agent
-Browse
+As an agent, the application usage is as followed:
+
+>Browse posted scripts, specify search by utilizing the "Search by" feature to narrow down script need:
 ![image](https://user-images.githubusercontent.com/112664790/231583862-03682a12-2cf4-4116-848d-f587e2a01161.png)
-Purchase
+
+>Easily purchase scripts or message the writer for further details:
 ![image](https://user-images.githubusercontent.com/112664790/231584295-d04f0386-d2a6-4bc7-8936-bfbe52a54bdb.png)
-view purchased scripts
+
+> View purchased scripts:
 ![image](https://user-images.githubusercontent.com/112664790/231584601-e3a04799-b9db-4919-96f5-ab287e4ec028.png)
 
-
-
-
-
+>Video demonstation of agent platform:
 https://user-images.githubusercontent.com/112664790/231575319-fc95de71-da90-4192-9f9a-f4056666c630.mp4
 
 
