@@ -2,6 +2,8 @@
 
 <div align="center">
 <a href=" ">
+![image](https://user-images.githubusercontent.com/112664790/231323622-18c89bf0-44dc-48ae-8231-bcc269f21a8c.png)
+
 <img src="public\assets\logo.png" alt="Logo" width="200" height="180" style="background-color:rgb(255,255,255)">
 </a>
 <h3 align="center"> Scriptomatic</h3>
