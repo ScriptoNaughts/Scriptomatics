@@ -28,14 +28,14 @@
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" type="email" name="emailAddress" placeholder="e.g. email@example.com" />
+            <input class="input" type="email" name="emailAddress" placeholder="e.g. email@example.com" required/>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input class="input" type="password" name="password" placeholder="********" />
+            <input class="input" type="password" name="password" placeholder="********" required/>
           </div>
         </div>
 
@@ -47,11 +47,11 @@
       <form class="box" method="POST" action="/api/users/">
         <div class="columns has-text-centered">
           <div class="column is-half">
-            <input type="radio" id="writer" name="roleTitle" value="writer" />
+            <input type="radio" id="writer" name="roleTitle" value="writer" required />
             <label for="writer">Writer</label>
           </div>
           <div class="column">
-            <input type="radio" id="agent" name="roleTitle" value="agent" />
+            <input type="radio" id="agent" name="roleTitle" value="agent" required />
             <label for="agent">Agent</label>
           </div>
         </div>
@@ -59,26 +59,26 @@
         <div class="field">
           <label class="label">First Name</label>
           <div class="control">
-            <input class="input" type="text" name="firstName" placeholder="e.g. John" />
+            <input class="input" type="text" name="firstName" placeholder="e.g. John" required/>
           </div>
         </div>
         <div class="field">
           <label class="label">Last Name</label>
           <div class="control">
-            <input class="input" type="text" name="lastName" placeholder="e.g. Doe" />
+            <input class="input" type="text" name="lastName" placeholder="e.g. Doe" required />
           </div>
         </div>
         <div class="field">
           <label class="label">Email</label>
           <div class="control">
-            <input class="input" type="email" name="emailAddress" placeholder="e.g. email@example.com" />
+            <input class="input" type="email" name="emailAddress" placeholder="e.g. email@example.com" required/>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Password</label>
           <div class="control">
-            <input class="input" type="password" name="password" placeholder="********" />
+            <input class="input" type="password" name="password" placeholder="********" required />
           </div>
         </div>
 

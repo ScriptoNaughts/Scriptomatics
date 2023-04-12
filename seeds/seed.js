@@ -13,12 +13,12 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  await TBLScript.bulkCreate(scriptData, {
+  await TBLUser.bulkCreate(userData, {
     individualHooks: true,
     returning: true,
   });
 
-  await TBLUser.bulkCreate(userData, {
+  await TBLScript.bulkCreate(scriptData, {
     individualHooks: true,
     returning: true,
   });
