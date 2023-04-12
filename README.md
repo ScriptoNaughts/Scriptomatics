@@ -91,25 +91,33 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 
 ### Tasks and Roles 
 Abdelrahman Ahmed
-> Tasks and roles
+> Back-end design and schema creation: Created database schema, controller routes for user model and server setup. Also contributed to connecting the controller routes to the handlebar.
+
+
 ---
 Graham Synnott
-> Tasks and roles
+> Schema creation and back-end design
+Create databse schema
+create models
+create server setup
+create controller routes for the user model
+Added hooks to TBLuser model
+add validation to the models
+connect the controleler routes to the handlebar
 ---
 Luba Mintsys
-> HTML template for writer workspace page, agent homepage, write homepage, agent browse page, agent purchased scripts page, writer's posted scripts page
-server set up - 
-agent handlebars navigation
-connected the controller routes to the handlebar.
+>Front-end design and development: Constructed and styled all user HTML pages. Contributed to server set up, agent handlebars navigation and connecting controller routes to handlebar.
 ---
 Onelle Fullente
-> Tasks and roles
+> 
+Tasks and roles
 ---
 Rajvir Dhanoa
-> Tasks and roles
+> Front-end design and development: Assisted with the contruction and styling of user HTML pages. Incorporated Readme template and made updates.
 ---
 Ayad Patel
-> Tasks and roles
+> integration with front-end design: Incorporated front-end javaScript functionality, created button and form event listeners. 
+Tasks and roles
 ---
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
