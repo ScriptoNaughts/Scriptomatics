@@ -70,14 +70,15 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-writer:
+User: Writer
 
 
 https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
 
 
+---
 
-Agent:
+User: Agent
 
 
 
