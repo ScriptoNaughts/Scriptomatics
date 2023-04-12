@@ -75,7 +75,65 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 - [x] Clean structure that meets quality coding standards
 - [x] Quality README
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- CONTRIBUTING -->
 ## Contributing
 ![image](https://user-images.githubusercontent.com/112664790/231309981-b3982f00-2c7d-480c-88cb-d237fe3500cb.png)
 
+### Tasks and Roles 
+Abdelrahman Ahmed
+> Tasks and roles
+---
+Graham Synnott
+> Tasks and roles
+---
+Luba Mintsys
+> Tasks and roles
+---
+Onelle Fullente
+> Tasks and roles
+---
+Rajvir Dhanoa
+> Tasks and roles
+---
+Ayad Patel
+> Tasks and roles
+---
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!-- CONTACT -->
+## Contact
+
+
+Repository
+>[https://github.com/ScriptoNaughts/Scriptomatics](https://github.com/ScriptoNaughts/Scriptomatics)
+---
+Abdelrahman Ahmed
+>[https://github.com/AbdelrahmanAhmed605](https://github.com/AbdelrahmanAhmed605)
+---
+Graham Synnott
+>[https://github.com/GSynnott](https://github.com/GSynnott)
+---
+Luba Mintsys
+>[https://github.com/lmintsys](https://github.com/lmintsys)
+---
+Onelle Fullente
+>[https://github.com/Onelle11](https://github.com/Onelle11)
+---
+Rajvir Dhanoa
+>[https://github.com/rajkdh](https://github.com/rajkdh)
+---
+Ayad Patel
+>[https://github.com/AyadPatel]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
