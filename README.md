@@ -68,12 +68,19 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-
-https://user-images.githubusercontent.com/112664790/231572546-36b36e8e-f283-4f52-bf3e-36ca6e56d888.gif
-
+writer:
 
 
-https://user-images.githubusercontent.com/112664790/231572586-598387d2-482a-4154-9690-398b3f1edbc2.gif
+https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
+
+
+
+Agent:
+
+
+
+https://user-images.githubusercontent.com/112664790/231575319-fc95de71-da90-4192-9f9a-f4056666c630.mp4
+
 
 
 
@@ -166,3 +173,6 @@ Ayad Patel
 * [Sequelize](https://sequelize.org/)
 * [Sqlite3](https://www.npmjs.com/package/sqlite3)
 * [stackoveroverflow](https://stackoverflow.com/)
+
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
