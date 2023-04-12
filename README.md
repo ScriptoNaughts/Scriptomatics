@@ -1,6 +1,6 @@
 <a name="readme-top"></a>
 <div align="center">
-<a href=" ">
+<a href="https://github.com/ScriptoNaughts/Scriptomatics/tree/main">
 <img src="public\assets\rm-logo.png" alt="Logo" width="200" height="180">
 </a>
 <h3 align="center"> Scriptomatic</h3>
@@ -35,9 +35,11 @@ A place to discover or be discovered
 ## About The Project
 ![image](https://user-images.githubusercontent.com/112664790/231297805-32bbea95-6500-4577-a48d-a3ac1424e71b.png)
 
-Scritomatic is a web application that enables writers to create and manage their scripts, and agents to browse, purchase and own scripts posted on the platform. This platform provides a workspace for writers to create, edit and delete drafts and post their scripts on the market, where agents can browse and purchase scripts that interest them. Agents can message writers to ask questions before and after purchasing a script. The platform tracks the status of each script to ensure that only one agent owns a script. This platform also enables writers to view their posted scripts and their status, and agents to view their purchased scripts. The intent of this we application is to provide a streamlined platform that simplifies the process of connecting writers and agents, and facilitates the sale and ownership of scripts.
+Scritomatic is a web application that enables writers to create and manage their scripts, and agents to browse, purchase and own scripts posted on the platform. This platform provides a workspace for writers to create, edit and delete drafts and post their scripts on the market, where agents can browse and purchase scripts that interest them. Agents can message writers to ask questions before and after purchasing a script. This platform tracks the status of each script to ensure that only one agent owns a script. This platform also enables writers to view their posted scripts and their status, and agents to view their purchased scripts. The intent of this we application is to provide a streamlined platform that simplifies the process of connecting writers and agents, and facilitates the sale and ownership of scripts.
 
-Our goal is to provide a useful platform for both writers and agents in the entertainment industry. This platform provides a centralized marketplace for writers to showcase their scripts and for agents to easily browse, purchase, and own high-quality scripts. This platform will help speed up the process in which scripts are moved to the next stage of development. Additionally, this platform will allow for direct messaging between writers and agents, ensuring that each script meets the unique needs and specifications of the agent. Overall, the team believes that the proposed web application has the potential to improve the movie production industry by providing a streamlined platform that allows writers to showcase their work and for agents to discover and purchase high-quality scripts that meet their needs.
+Our goal is to provide a useful platform for both writers and agents in the entertainment industry. This platform provides a centralized marketplace for writers to showcase their scripts and for agents to easily browse, purchase, and own high-quality scripts. This platform will help speed up the process in which scripts are moved to the next stage of development. 
+
+ Overall, our team believes that Scriptomatic has the potential to improve the movie production industry by providing a streamlined platform that allows writers to showcase their work and for agents to discover and purchase high-quality scripts that meet their needs.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -79,7 +81,7 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 - [x] environment variable placed to protect API keys and sensitive information
 - [x] Deployed using Heroku
 - [x] Responsive
-- [x] Polished Ui
+- [x] Polished UI
 - [x] Clean structure that meets quality coding standards
 - [x] Quality README
 
@@ -91,33 +93,22 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 
 ### Tasks and Roles 
 Abdelrahman Ahmed
-> Back-end design and schema creation: Created database schema, controller routes for user model and server setup. Also contributed to connecting the controller routes to the handlebar.
-
-
+> Back-end design and schema creation: Created database schema, controller routes for user model and server setup. Also contributed to connecting the controller routes to the handlebar
 ---
 Graham Synnott
-> Schema creation and back-end design
-Create databse schema
-create models
-create server setup
-create controller routes for the user model
-Added hooks to TBLuser model
-add validation to the models
-connect the controleler routes to the handlebar
+> Back-end design and schema creation: Created database schema, models, server setup, and controller routes for the user model. also added hooks to TBLuser model, validation to models and connected the controller routes to the handlebar
 ---
 Luba Mintsys
->Front-end design and development: Constructed and styled all user HTML pages. Contributed to server set up, agent handlebars navigation and connecting controller routes to handlebar.
+>Front-end design and development: Constructed and styled all user HTML pages. Contributed to server set up, agent handlebars navigation and connecting controller routes to handlebar
 ---
 Onelle Fullente
-> 
-Tasks and roles
+> Front-end design and development: Assisted with the construction and styling of user HTML pages and supported with front-end javascript functionality
 ---
 Rajvir Dhanoa
-> Front-end design and development: Assisted with the contruction and styling of user HTML pages. Incorporated Readme template and made updates.
+> Front-end design and development: Assisted with the contruction and styling of user HTML pages. Incorporated Readme template and made updates
 ---
 Ayad Patel
-> integration with front-end design: Incorporated front-end javaScript functionality, created button and form event listeners. 
-Tasks and roles
+> integration with front-end design: Incorporated front-end javaScript functionality, created button and form event listeners
 ---
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -156,3 +147,14 @@ Ayad Patel
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+* [Bulma](https://bulma.io/)
+* [Bcrypt](https://www.npmjs.com/package/bcrypt)
+* [Connect-session-sequalize](https://www.npmjs.com/package/connect-session-sequelize)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Express](https://expressjs.com/)
+* [Express-handlebars](https://www.npmjs.com/package/express-handlebars)
+* [Express-session](https://www.npmjs.com/package/express-session)
+* [Mysql2](https://www.npmjs.com/package/mysql2)
+* [Sequelize](https://sequelize.org/)
+* [Sqlite3](https://www.npmjs.com/package/sqlite3)
+* [stackoveroverflow](https://stackoverflow.com/)
