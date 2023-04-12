@@ -70,12 +70,15 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-User: Writer
-View your posted scripts:
+As a scriptwriter, the application usage is as followed:
+
+> View posted scripts:
 ![image](https://user-images.githubusercontent.com/112664790/231582586-e50f6f54-9897-4546-801c-9893ad6eb72a.png)
 
-Workspace:
+> Writer workspace:
 ![image](https://user-images.githubusercontent.com/112664790/231582361-bc186550-247a-4b50-b8aa-33ba458a15ec.png)
+
+>Easily edit, publish or simply save you projects:
 ![image](https://user-images.githubusercontent.com/112664790/231582996-72340d16-cbe8-4438-9835-84d41cc4b39f.png)
 
 
