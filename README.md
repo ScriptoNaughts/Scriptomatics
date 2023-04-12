@@ -71,6 +71,14 @@ Our goal is to provide a useful platform for both writers and agents in the ente
 ## Usage
 
 User: Writer
+View your posted scripts:
+![image](https://user-images.githubusercontent.com/112664790/231582586-e50f6f54-9897-4546-801c-9893ad6eb72a.png)
+
+Workspace:
+![image](https://user-images.githubusercontent.com/112664790/231582361-bc186550-247a-4b50-b8aa-33ba458a15ec.png)
+![image](https://user-images.githubusercontent.com/112664790/231582996-72340d16-cbe8-4438-9835-84d41cc4b39f.png)
+
+
 
 
 https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f-bcde-85f5aad01302.mp4
@@ -79,6 +87,14 @@ https://user-images.githubusercontent.com/112664790/231575261-dad192dc-03da-428f
 ---
 
 User: Agent
+Browse
+![image](https://user-images.githubusercontent.com/112664790/231583862-03682a12-2cf4-4116-848d-f587e2a01161.png)
+Purchase
+![image](https://user-images.githubusercontent.com/112664790/231584295-d04f0386-d2a6-4bc7-8936-bfbe52a54bdb.png)
+view purchased scripts
+![image](https://user-images.githubusercontent.com/112664790/231584601-e3a04799-b9db-4919-96f5-ab287e4ec028.png)
+
+
 
 
 
