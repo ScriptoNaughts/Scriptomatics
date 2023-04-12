@@ -16,6 +16,7 @@ const seedDatabase = async () => {
   await TBLUser.bulkCreate(userData, {
     individualHooks: true,
     returning: true,
+    order: [["id", "ASC"]],
   });
 
   await TBLScript.bulkCreate(scriptData, {
