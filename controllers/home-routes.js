@@ -218,7 +218,10 @@ router.get("/scripts/agent", async (req, res) => {
       return scriptText;
     });
 
-    res.render("agent-purchased", { scriptData, loggedIn: req.session.loggedIn });
+    res.render("agent-purchased", {
+      scriptData,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -273,9 +276,16 @@ router.get("/browse", async (req, res) => {
       return res.status(404).json({ message: "No script data found" });
     }
 
-    const scriptData = dbScriptData.map((script) =>
-      script.get({ plain: true })
-    );
+    /*-------------------------
+      Limits the text of each script to the first 100 words as agents who have not purchased the script should not have full access yet
+    ---------------------------*/
+
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 100).join(" ") + "...";
+      return scriptText;
+    });
 
     res.render("agent-browse", { scriptData, loggedIn: req.session.loggedIn });
   } catch (err) {

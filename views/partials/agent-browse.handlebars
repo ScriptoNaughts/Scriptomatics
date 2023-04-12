@@ -1,14 +1,24 @@
-<div class="card mb-4" id="search-result" data-id={{id}}>
+{{! // Create a card for each posted script}}
+<div class="card mb-6 search-result">
+  <div class="card-header">
+    <p class="card-header-title">
+      <span class="has-text-dark">Writer:
+        {{Writer.firstName}}
+        {{Writer.lastName}}</span>
+    </p>
+  </div>
   <div class="card-content">
     <div class="script-details mb-2">
       <p class="title is-4">{{title}}</p>
       <p class="subtitle is-6">{{description}}</p>
     </div>
     <div class="content">
-      <p><strong>Author:</strong>
-        {{Writer.firstName}} {{Writer.lastName}}</p>
       <p>{{text}}</p>
       {{!-- <p><em>Published on {{format_date updatedAt}}</em></p> --}}
     </div>
   </div>
+  <footer class="card-footer">
+    <a href="" class="card-footer-item message-writer" data-writerId={{Writer.id}}>Message Writer</a>
+    <a href="" class="card-footer-item purchase-script" data-scriptId={{id}}>Purchase Script</a>
+  </footer>
 </div>
