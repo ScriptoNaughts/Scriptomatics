@@ -11,6 +11,7 @@ const seedDatabase = async () => {
   await TBLRole.bulkCreate(roleData, {
     individualHooks: true,
     returning: true,
+    order: [["id", "ASC"]],
   });
 
   await TBLUser.bulkCreate(userData, {

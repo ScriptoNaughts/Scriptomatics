@@ -121,6 +121,9 @@ router.post("/login", async (req, res, next) => {
       where: { id: userData.roleID },
     });
 
+    console.log("\n\nUser Data:" + JSON.stringify(userData) + "\n\n"); // Output the session data to the console
+    console.log("\n\nUser Role:" + JSON.stringify(role) + "\n\n"); // Output the session data to the console
+
     // Regenerate the session to prevent session fixation
     req.session.regenerate(function (err) {
       if (err) next(err);
