@@ -33,7 +33,7 @@ A place to discover or be discovered
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-![image](https://user-images.githubusercontent.com/112664790/231297805-32bbea95-6500-4577-a48d-a3ac1424e71b.png)
+![image](./public/assets/Scriptomatics_HomePage.png)
 
 Scritomatic is a web application that enables writers to create and manage their scripts, and agents to browse, purchase and own scripts posted on the platform. This platform provides a workspace for writers to create, edit and delete drafts and post their scripts on the market, where agents can browse and purchase scripts that interest them. Agents can message writers to ask questions before and after purchasing a script. This platform tracks the status of each script to ensure that only one agent owns a script. This platform also enables writers to view their posted scripts and their status, and agents to view their purchased scripts. The intent of this we application is to provide a streamlined platform that simplifies the process of connecting writers and agents, and facilitates the sale and ownership of scripts.
 
