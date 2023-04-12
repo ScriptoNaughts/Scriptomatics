@@ -131,6 +131,7 @@ router.get("/scripts/writer", async (req, res) => {
           attributes: { exclude: ["password"] }, // exclude's the agents password as that is sensitive information
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
@@ -202,6 +203,7 @@ router.get("/scripts/agent", async (req, res) => {
           attributes: { exclude: ["password"] }, // exclude's the writers password as that is sensitive information
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
@@ -270,6 +272,7 @@ router.get("/browse", async (req, res) => {
           attributes: { exclude: ["password"] },
         },
       ],
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
@@ -318,6 +321,7 @@ router.get("/workspace", async (req, res) => {
         writerID: req.session.userID,
         status: "draft",
       },
+      order: [["updatedAt", "DESC"]],
     });
 
     if (!dbScriptData) {
