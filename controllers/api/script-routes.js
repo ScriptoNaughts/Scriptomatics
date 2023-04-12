@@ -53,11 +53,6 @@ router.get("/writer/:name", async (req, res) => {
   try {
     // Get the search term from the URL parameter and remove any whitespace
     const searchName = req.params.name.replace(/\s/g, "").toLowerCase();
-    // Find the role with the title "writer" in the TBLRole table
-    // const role = await TBLRole.findOne({
-    //   where: { roleTitle: "writer" },
-    // });
-    // Find all users who have a "writer" role
     const dbWriterData = await TBLUser.findAll({
       where: { roleID: 1 },
     });
@@ -68,7 +63,6 @@ router.get("/writer/:name", async (req, res) => {
     const writerData = dbWriterData.map((writer) =>
       writer.get({ plain: true })
     );
-    console.log("\n\nWriterData:" + JSON.stringify(writerData) + "\n\n");
     // This array will store all the script records for the specified writer(s)
     const scriptsData = [];
     // Loop through all the writers
@@ -90,9 +84,15 @@ router.get("/writer/:name", async (req, res) => {
             { model: TBLUser, as: "Assignee" },
           ],
         });
-        const writerScripts = dbWriterScripts.map((script) =>
-          script.get({ plain: true })
-        );
+        /*-------------------------
+      Limits the text of each script to the first 50 words as we are only presenting the previews
+    ---------------------------*/
+        const writerScripts = dbWriterScripts.map((script) => {
+          const scriptText = script.get({ plain: true });
+          scriptText.text =
+            scriptText.text.split(" ").slice(0, 50).join(" ") + "...";
+          return scriptText;
+        });
         // Add all the writer's scripts to the array
         scriptsData.push(...writerScripts);
       }
