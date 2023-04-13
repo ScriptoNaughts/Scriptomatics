@@ -14,7 +14,7 @@ var editButtonHandler = async (event) => {
 
     try {
       const response = await fetch(
-        `/api/scripts/edit/${event.target.getAttribute("data-id")}`
+        `/api/scripts/writer/edit/${event.target.getAttribute("data-id")}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -72,7 +72,7 @@ var publishButtonHandler = async (event) => {
 
   // Make a POST or PUT request depending on whether the script has been saved before
   const method = isSaved ? "PUT" : "POST";
-  const url = isSaved ? "/api/scripts/" + scriptId : "/api/scripts";
+  const url = isSaved ? "/api/scripts/writer/" + scriptId : "/api/scripts/writer/";
   try {
     const response = await fetch(url, {
       method: method,
@@ -138,7 +138,7 @@ var saveButtonHandler = async (event) => {
 
   // Make a POST or PUT request depending on whether the script has been saved before
   const method = isSaved ? "PUT" : "POST";
-  const url = isSaved ? "/api/scripts/" + scriptId : "/api/scripts";
+  const url = isSaved ? "/api/scripts/writer/" + scriptId : "/api/scripts/writer/";
 
   try {
     const response = await fetch(url, {

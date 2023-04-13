@@ -17,7 +17,7 @@ var searchButtonHandler = async (event) => {
   } else if (keywordEl.checked) {
     console.log("keyword");
   } else if (authorEl.checked) {
-    fetch(`/api/scripts/writer/${searchBarEl.value}`)
+    fetch(`/api/scripts/agent/browse/${searchBarEl.value}`)
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
@@ -78,7 +78,7 @@ purchaseScriptHandler = async (event) => {
 
     try {
       // Make a PUT request to the server to allow the requesting user to purchase the script
-      const response = await fetch(`/api/scripts/purchase/${scriptId}`, {
+      const response = await fetch(`/api/scripts/agent/purchase/${scriptId}`, {
         method: "PUT",
       });
 

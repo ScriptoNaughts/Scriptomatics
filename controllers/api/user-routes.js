@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// DELETE a user
+// -------------------- DELETE a user --------------------
 router.delete("/:id", async (req, res) => {
   try {
     const deletedUserData = await TBLUser.destroy({
@@ -86,7 +86,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// Allow a user to login
+// -------------------- Allow a user to login --------------------
 router.post("/login", async (req, res, next) => {
   try {
     console.log("\n Running user-routes /login \n");
@@ -152,7 +152,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-// Allow a user to logout
+// -------------------- Allow a user to logout --------------------
 router.post("/logout", async (req, res, next) => {
   // Check if user is logged in
   if (req.session.loggedIn) {
