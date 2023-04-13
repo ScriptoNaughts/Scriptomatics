@@ -90,7 +90,7 @@ var publishButtonHandler = async (event) => {
 
     if (response.ok) {
       console.log(`Script ${isSaved ? "updated" : "posted"} successfully`);
-      window.location.href = "/scripts/writer";
+      window.location.href = "/scripts/writer/posted";
     } else {
       console.error(`Error ${isSaved ? "updating" : "posting"} script`);
     }

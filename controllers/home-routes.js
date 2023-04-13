@@ -66,7 +66,7 @@ router.get("/loggedin", async (req, res) => {
 });
 
 // GET request to render the scripts page where the writers can have a preview of all their posted scripts (purchased & published)
-router.get("/scripts/writer", async (req, res) => {
+router.get("/scripts/writer/posted", async (req, res) => {
   try {
     // Query the database for script data
 
@@ -160,7 +160,7 @@ router.get("/scripts/writer", async (req, res) => {
 });
 
 // GET request to render the scripts page where the agents can have a preview of all their puchased scripts
-router.get("/scripts/agent", async (req, res) => {
+router.get("/scripts/agent/purchased", async (req, res) => {
   try {
     // Query the database for script data
 
@@ -233,7 +233,7 @@ router.get("/scripts/agent", async (req, res) => {
 // GET request to render the browse page where agents can browse published scripts put on the market
 // When this page is loaded, the user will initially be presented with all the available published scripts. When
 // the user wishes to browse by category, it will trigger the GET routes in the `api` folder
-router.get("/browse", async (req, res) => {
+router.get("/agent/browse", async (req, res) => {
   try {
     /* scriptData follows the following format:
 [
@@ -298,7 +298,7 @@ router.get("/browse", async (req, res) => {
 });
 
 // GET request to render the workspace where writers can work on their draft scripts
-router.get("/workspace", async (req, res) => {
+router.get("/writer/workspace", async (req, res) => {
   try {
     /* scriptData follows the following format:
 [
