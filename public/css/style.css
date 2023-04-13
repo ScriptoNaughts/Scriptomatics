@@ -12,7 +12,6 @@
 
 .navbar {
     background-color: #BABFCD;
-    height: 10vh;
 }
 
 #logo, #logo-img {
@@ -22,6 +21,24 @@
     padding-left: 0.5rem;
 }
 
+#testimonials {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.testimonial-column {
+  display: flex;
+}
+
+.testimonial-column .card {
+  flex: 1;
+}
+
+.testimonial-column nav {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
 
 #menu-sidebar {
     background-color: #BABFCD;
@@ -58,6 +75,12 @@ body {
     color:  #565656;
     cursor: pointer;
     
+}
+
+.image img {
+    display: block;
+    height: 128px;
+    width: 128px;
 }
  
 
