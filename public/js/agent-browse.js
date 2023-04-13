@@ -1,32 +1,19 @@
 var searchBarEl = document.querySelector(".search-bar");
 
-var genreEl = document.querySelector("#genre");
-var keywordEl = document.querySelector("#keyword");
+var titleEl = document.querySelector("#title");
 var authorEl = document.querySelector("#author");
 
 var searchButtonEl = document.querySelector(".search-button");
 var searchResultsEl = document.querySelector("#search-results");
 
-// Checks the radio button chosen by the user, the value entered in the search bar, and applies the appropriate
-// api call that searches for scripts based on the user's selected criteria and search term
-var searchButtonHandler = async (event) => {
-  event.preventDefault();
+// Function that takes in an array of search results and returns bulma cards with the search result information on each card
+function createSearchCards(searchResultData) {
+  searchResultsEl.removeEventListener("click", purchaseScriptHandler); // remove event listener
+  // Remove all child elements from the search results container
+  searchResultsEl.innerHTML = "";
 
-  if (genreEl.checked) {
-    console.log("genre");
-  } else if (keywordEl.checked) {
-    console.log("keyword");
-  } else if (authorEl.checked) {
-    fetch(`/api/scripts/agent/browse/${searchBarEl.value}`)
-      .then(function (response) {
-        if (response.ok) {
-          response.json().then(function (data) {
-            searchResultsEl.removeEventListener("click", purchaseScriptHandler); // remove event listener
-            // Remove all child elements from the search results container
-            searchResultsEl.innerHTML = "";
-
-            data.forEach((script) => {
-              const cardEl = `
+  searchResultData.forEach((script) => {
+    const cardEl = `
                 <div class="card mb-6 search-result" data-id="${script.id}">
                   <div class="card-header">
                     <p class="card-header-title">
@@ -49,12 +36,41 @@ var searchButtonHandler = async (event) => {
                     <a href="" class="card-footer-item purchase-script" data-scriptId="${script.id}">Purchase Script</a>
                   </footer>
                 </div>`;
-              const cardContainer = document.createElement("div");
-              cardContainer.innerHTML = cardEl.trim();
-              // Adds all the new scripts from the api call as bulma-card child elements to the searchResults element
-              searchResultsEl.appendChild(cardContainer.firstChild);
-            });
-            searchResultsEl.addEventListener("click", purchaseScriptHandler); // re-attach event listener
+    const cardContainer = document.createElement("div");
+    cardContainer.innerHTML = cardEl.trim();
+    // Adds all the new scripts from the api call as bulma-card child elements to the searchResults element
+    searchResultsEl.appendChild(cardContainer.firstChild);
+  });
+  searchResultsEl.addEventListener("click", purchaseScriptHandler); // re-attach event listener
+}
+
+// Checks the radio button chosen by the user, the value entered in the search bar, and applies the appropriate
+// api call that searches for scripts based on the user's selected criteria and search term
+var searchButtonHandler = async (event) => {
+  event.preventDefault();
+
+  if (titleEl.checked) {
+    console.log("title");
+    fetch(`/api/scripts/agent/browse/title/${searchBarEl.value}`)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            createSearchCards(data);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else if (authorEl.checked) {
+    console.log("author");
+    fetch(`/api/scripts/agent/browse/author/${searchBarEl.value}`)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            createSearchCards(data);
           });
         } else {
           alert("Error: " + response.statusText);
