@@ -1,4 +1,5 @@
 var workspaceEl = document.querySelector("#workspace");
+var workspaceButtons = document.querySelector("#workspace-buttons");
 var editButtonEl = document.querySelector(".edit-button");
 var publishButtonEl = document.querySelector("#publish-button");
 var saveButtonEl = document.querySelector("#save-button");
@@ -19,11 +20,25 @@ var editButtonHandler = async (event) => {
       if (response.ok) {
         const data = await response.json();
         console.log("\n\nResponse:" + JSON.stringify(data) + "\n\n");
+        // Place the script content on the workspace
         titleTextBox.value = data.title;
         descTextBox.value = data.description;
         scriptTextBox.value = data.text;
         scriptTextBox.dataset.id = data.id; // add data-id attribute
         scriptTextBox.classList.add("script-saved");
+
+        // Check if the delete button already exists
+        const deleteButton = document.querySelector("#delete-button");
+        if (!deleteButton) {
+          // Adds a delete button to the workspace that allows users to delete their script
+          const deleteDiv = document.createElement("div");
+          deleteDiv.className = "control";
+          const deleteButtonHTML = `<button class="button is-danger is-large has-text-light" id="delete-button">
+                    Delete<i class="fa fa-trash ml-2"></i>
+                  </button>`;
+          deleteDiv.innerHTML = deleteButtonHTML.trim();
+          workspaceButtons.appendChild(deleteDiv);
+        }
       } else {
         alert("\n\nError: " + data.statusText);
       }
@@ -72,7 +87,9 @@ var publishButtonHandler = async (event) => {
 
   // Make a POST or PUT request depending on whether the script has been saved before
   const method = isSaved ? "PUT" : "POST";
-  const url = isSaved ? "/api/scripts/writer/" + scriptId : "/api/scripts/writer/";
+  const url = isSaved
+    ? "/api/scripts/writer/" + scriptId
+    : "/api/scripts/writer/";
   try {
     const response = await fetch(url, {
       method: method,
@@ -138,7 +155,9 @@ var saveButtonHandler = async (event) => {
 
   // Make a POST or PUT request depending on whether the script has been saved before
   const method = isSaved ? "PUT" : "POST";
-  const url = isSaved ? "/api/scripts/writer/" + scriptId : "/api/scripts/writer/";
+  const url = isSaved
+    ? "/api/scripts/writer/" + scriptId
+    : "/api/scripts/writer/";
 
   try {
     const response = await fetch(url, {
@@ -179,9 +198,42 @@ var newButtonHandler = (event) => {
   titleTextBox.value = "";
   descTextBox.value = "";
   scriptTextBox.value = "";
+
+  // Remove the delete button from the workspace, if it exists
+  const deleteButtonDiv = document.getElementById("delete-button").parentNode;
+  if (deleteButtonDiv) {
+    workspaceButtons.removeChild(deleteButtonDiv);
+  }
+};
+
+var deleteButtonHandler = async (event) => {
+  if (event.target.id === "delete-button") {
+    event.preventDefault();
+
+    // Get the id of the script which is placed in the scriptTextBox
+    const scriptId = scriptTextBox.getAttribute("data-id");
+
+    console.log("ScriptID: ", scriptId);
+
+    try {
+      const response = await fetch(`/api/scripts/writer/${scriptId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        console.log(`Script ${scriptId} deleted successfully`);
+        location.reload();
+      } else {
+        console.error(`Error deleting script`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 };
 
 workspaceEl.addEventListener("click", editButtonHandler);
+workspaceButtons.addEventListener("click", deleteButtonHandler);
 publishButtonEl.addEventListener("click", publishButtonHandler);
 saveButtonEl.addEventListener("click", saveButtonHandler);
 newButtonEl.addEventListener("click", newButtonHandler);
