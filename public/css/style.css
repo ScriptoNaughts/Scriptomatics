@@ -34,7 +34,11 @@
   flex: 1;
 }
 
-
+.testimonial-column nav {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
 
 #menu-sidebar {
     background-color: #BABFCD;
