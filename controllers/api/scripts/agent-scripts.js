@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const { TBLUser, TBLScript } = require("../../../models");
+const { Op } = require("sequelize");
 
 // GET route to get all the scripts written by any writer whose name (first or last or combination) is included in the client's search term
-router.get("/browse/:name", async (req, res) => {
+router.get("/browse/author/:name", async (req, res) => {
   try {
     // Get the search term from the URL parameter and remove any whitespace
     const searchName = req.params.name.replace(/\s/g, "").toLowerCase();
@@ -57,6 +58,47 @@ router.get("/browse/:name", async (req, res) => {
       return;
     }
     res.status(200).json(scriptsData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET route to get all the scripts where the client's search term is included in the title
+router.get("/browse/title/:title", async (req, res) => {
+  try {
+    // Get the search term from the URL parameter and remove any whitespace
+    const searchTitle = req.params.title.replace(/\s+/g, " ").toLowerCase();
+
+    console.log("\n\nSearchTitle:", searchTitle, "\n\n");
+
+    const dbScriptData = await TBLScript.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchTitle}%`,
+        },
+      },
+      include: [
+        { model: TBLUser, as: "Writer" },
+        { model: TBLUser, as: "Assignee" },
+      ],
+    });
+
+    console.log("\n\nResults:", JSON.stringify(dbScriptData, null, 4), "\n\n");
+
+    if (!dbScriptData) {
+      res.status(404).json({ message: "No scripts found" });
+      return;
+    }
+    /*-------------------------
+      Limits the text of each script to the first 50 words as we are only presenting the previews
+    ---------------------------*/
+    const scriptData = dbScriptData.map((script) => {
+      const scriptText = script.get({ plain: true });
+      scriptText.text =
+        scriptText.text.split(" ").slice(0, 50).join(" ") + "...";
+      return scriptText;
+    });
+    res.status(200).json(scriptData);
   } catch (err) {
     res.status(500).json(err);
   }
