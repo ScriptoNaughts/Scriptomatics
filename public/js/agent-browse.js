@@ -32,7 +32,7 @@ function createSearchCards(searchResultData) {
                     </div>
                   </div>
                   <footer class="card-footer">
-                    <a href="" class="card-footer-item message-writer" data-writerId="${script.Writer.id}">Message Writer</a>
+                    <a href="" class="card-footer-item message-writer" data-writerId="${script.Writer.id}">Message Writer (In Development)</a>
                     <a href="" class="card-footer-item purchase-script" data-scriptId="${script.id}">Purchase Script</a>
                   </footer>
                 </div>`;
@@ -50,7 +50,6 @@ var searchButtonHandler = async (event) => {
   event.preventDefault();
 
   if (titleEl.checked) {
-    console.log("title");
     fetch(`/api/scripts/agent/browse/title/${searchBarEl.value}`)
       .then(function (response) {
         if (response.ok) {
@@ -65,7 +64,6 @@ var searchButtonHandler = async (event) => {
         console.log(error);
       });
   } else if (authorEl.checked) {
-    console.log("author");
     fetch(`/api/scripts/agent/browse/author/${searchBarEl.value}`)
       .then(function (response) {
         if (response.ok) {

@@ -69,8 +69,6 @@ router.get("/browse/title/:title", async (req, res) => {
     // Get the search term from the URL parameter and remove any whitespace
     const searchTitle = req.params.title.replace(/\s+/g, " ").toLowerCase();
 
-    console.log("\n\nSearchTitle:", searchTitle, "\n\n");
-
     const dbScriptData = await TBLScript.findAll({
       where: {
         title: {
@@ -82,8 +80,6 @@ router.get("/browse/title/:title", async (req, res) => {
         { model: TBLUser, as: "Assignee" },
       ],
     });
-
-    console.log("\n\nResults:", JSON.stringify(dbScriptData, null, 4), "\n\n");
 
     if (!dbScriptData) {
       res.status(404).json({ message: "No scripts found" });
