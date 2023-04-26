@@ -32,7 +32,7 @@ function createSearchCards(searchResultData) {
                     </div>
                   </div>
                   <footer class="card-footer">
-                    <a href="" class="card-footer-item message-writer" data-writerId="${script.Writer.id}">Message Writer</a>
+                    <a href="" class="card-footer-item message-writer" data-writerId="${script.Writer.id}">Message Writer (In Development)</a>
                     <a href="" class="card-footer-item purchase-script" data-scriptId="${script.id}">Purchase Script</a>
                   </footer>
                 </div>`;
